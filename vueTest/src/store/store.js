@@ -1,17 +1,25 @@
 import { createStore } from "vuex";
 //import axiosClient from "../axios";
+import { ref, computed } from 'vue'
+import { defineStore } from 'pinia'
 
-const store = createStore({
+//export const useCounterStore = defineStore('counter', {})
+
+//Definimos el almacén "counter" mediante defineStore
+//Este almacén contendrá el estado, las getters y las acciones
+export const useStore = defineStore('store', {
     // state as the data
-    state: {
+    state: () => ({ 
         pokemonTeamData: [],
-
-    },
+        test: "Hola Mundo!"
+      }),
     // actions as the methods
     actions: {
         resetTeamData() {
             this.pokemonTeamData = [];
         },
+
+        
 
         async getPikachu() {
             // obtiene mediante axios los datos del pokemon
@@ -24,8 +32,10 @@ const store = createStore({
     },
     // getters as the computed
     getters: {
-
+        showTest () {
+            console.log(this.test);
+        },
     }
 });
 
-export default store;
+

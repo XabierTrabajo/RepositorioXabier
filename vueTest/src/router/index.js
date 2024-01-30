@@ -4,6 +4,7 @@ import BlogView from '../views/BlogView.vue'
 import PostView from '../views/PostView.vue'
 import PokemonView from '../views/PokemonView.vue'
 import PokemonTeamView from '../views/PokemonTeamView.vue'
+import TestPiniaView from '../views/TestPiniaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/pokemonTeam',
       name: 'pokemonTeam',
       component: PokemonTeamView
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: TestPiniaView
     }
   ]
 })

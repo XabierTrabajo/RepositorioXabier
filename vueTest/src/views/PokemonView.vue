@@ -46,6 +46,8 @@ onMounted(()=>{
 
 <script>
 import axios from "axios";
+import {useStore} from '@/store/store'
+import { mapState, mapActions } from 'pinia'
 import { mapWritableState } from 'pinia'
 
 export default {
@@ -59,6 +61,9 @@ export default {
       pokemonImgShiny: "",
       pokemonImgShinyF: "",
     }
+  },
+  computed: {
+    ...mapState(useStore, ['contador','parImpar'])
   },
   methods: {
     async getAllData() {
@@ -105,7 +110,13 @@ export default {
       this.pokemonImgF = "";
       this.pokemonImgShiny = "";
       this.pokemonImgShinyF = "";
-    }
+    },
+
+    insertar() {
+
+    },
+    ...mapWritableState(useCounterStore, ['counter']),
+    ...mapActions(useStore, ['insertarSeleccionado', 'insertarPikachu', 'vaciarSeleccion', 'vaciarEquipo'])
   },
   created() {
     this.resetData();

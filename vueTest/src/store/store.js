@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-//import axiosClient from "../axios";
+import axios from "axios";
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
@@ -10,31 +10,57 @@ import { defineStore } from 'pinia'
 export const useStore = defineStore('store', {
     // state as the data
     state: () => ({ 
+        contador:5,
+
+        pokemonObjectData: [],
         pokemonTeamData: [],
-        test: "Hola Mundo!"
+        index: 0
       }),
-    // actions as the methods
-    actions: {
-        resetTeamData() {
-            this.pokemonTeamData = [];
-        },
-
-        
-
-        async getPikachu() {
-            // obtiene mediante axios los datos del pokemon
-            const allData = await axios.get(
-              "https://pokeapi.co/api/v2/pokemon/pikachu"
-            );
-            // guarda los datos en el array
-            this.pokemonTeamData = allData.data;
-        }
-    },
+    
     // getters as the computed
     getters: {
-        showTest () {
-            console.log(this.test);
+        parImpar(){
+            if (this.contador % 2===0) 
+              return "PAR"
+            return "IMPAR"
+        }
+    },
+    // actions as the methods
+    actions: {
+        
+        incrementar() {
+            this.contador++
         },
+        decrementar(){
+        this.contador--
+        },
+
+        insertarSeleccionado() {
+            console.log("boton pulsado");
+        },
+
+        insertarPikachu() {
+            
+
+            // obtiene mediante axios los datos del pokemon
+            const allData = axios.get(
+                "https://pokeapi.co/api/v2/pokemon/pikachu"
+            );
+            // guarda los datos en el array
+            this.pokemonObjectData = allData.data;
+            this.pokemonTeamData.push(this.pokemonObjectData);
+            this.index = this.pokemonTeamData.length;
+
+            this.client.emit('insertarPikachu');
+        },
+
+        vaciarSeleccion() {
+            console.log("boton pulsado");
+        },
+
+        vaciarEquipo() {
+            this.pokemonTeamData = []
+        }
     }
 });
 

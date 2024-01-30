@@ -16,6 +16,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/blog">Blog</RouterLink>
         <RouterLink to="/pokemon">Pokédex</RouterLink>
         <RouterLink to="/pokemonTeam">PokéTeam</RouterLink>
+        <RouterLink to="/test">Test Pinia</RouterLink>
       </nav>
     </div>
   </header>

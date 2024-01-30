@@ -10,37 +10,43 @@ onMounted(()=>{
 })
 </script>
 
-<template>
-  <main>
+<template>    
+<main>
     <form @submit.prevent>
-      <label for="listaPokemon">Ver Pokémon</label>
-      <select name="listaPokemon" id="listaPokemon">
-        <option v-for="pokemon in pokemonTeamData" value="">
-          {{ pokemon.name }}
-        </option>
-      </select>
+      <div v-if="pokemonTeamData.length == 10">
+        <label for="listaPokemon">Ver Pokémon</label>
+        <select name="listaPokemon" id="listaPokemon">
+          <option v-for="pokemon in pokemonTeamData" v-bind:value="index">
+            {{ pokemon.name }}
+          </option>
+        </select>
+      </div>
+      
+      <button @click="store.insertarPikachu()">Insertar Pikachu</button>
+      <button @click="store.vaciarSeleccion()">Borrar seleccionado</button>
+      <button @click="store.vaciarEquipo()">Borrar equipo</button>
     </form><br><br><br>
-<button @click="showTest">test</button>
 
-    <div v-if="pokemonTeamData != null">
-      <span>ID Pokédex: {{ pokemonTeamData.id }}</span><br>
-      <span>Nombre: {{ pokemonTeamData.name }}</span><br>
+
+    <div v-if="pokemonTeamData.length!=0">
+      <span>ID Pokédex: {{ pokemonTeamData[index].id }}</span><br>
+      <span>Nombre: {{ pokemonTeamData[index].name }}</span><br>
       <span>Tipos: 
-        <div v-for="(type, key) in pokemonTeamData.types" :key="key">
+        <div v-for="(type, key) in pokemonTeamData[index].types" :key="key">
           - {{ type.type.name }}
         </div>
       </span><br>
       <span>Habilidades: 
-        <div v-for="(ability, key) in pokemonTeamData.abilities" :key="key">
+        <div v-for="(ability, key) in pokemonTeamData[index].abilities" :key="key">
           - {{ ability.ability.name }}
         </div>
       </span><br>
       <span>Imagenes: </span><br>
       <div>
-        <img :src=pokemonImg alt="Macho" v-if="pokemonImg != null">
-        <img :src=pokemonImgF alt="Hembra" v-if="pokemonImgF != null">
-        <img :src=pokemonImgShiny alt="Macho" v-if="pokemonImgShiny != null">
-        <img :src=pokemonImgShinyF alt="Hembra" v-if="pokemonImgShinyF != null">
+        <img :src=pokemonTeamSprites[index].front_default alt="Macho" v-if="pokemonTeamSprites[index].front_default != null">
+        <img :src=pokemonTeamSprites[index].front_female alt="Hembra" v-if="pokemonTeamSprites[index].front_female != null">
+        <img :src=pokemonTeamSprites[index].front_shiny alt="Macho" v-if="pokemonTeamSprites[index].front_shiny != null">
+        <img :src=pokemonTeamSprites[index].front_shiny_female alt="Hembra" v-if="pokemonTeamSprites[index].front_shiny_female != null">
       </div>
     </div>
   </main>
@@ -64,15 +70,17 @@ export default {
       
     }
   },
-  methods: {
-    //En esta sección se utiliza mapActions para mapear las acciones del store useCounterStore en los métodos del componente. Se están mapeando las acciones incrementar y decrementar.
-    ...mapActions(useStore,['showTest'])
-  },
   computed: {
-    //En esta sección se utiliza mapState para mapear las propiedades del estado del store useCounterStore en las propiedades computadas del componente. En este caso, se están mapeando las propiedades contador y parImpar del store al componente.
-    ...mapState(useStore, ['test'])
+    //En esta sección se utiliza mapState para mapear las propiedades del estado del store useStore en las propiedades computadas del componente. 
+    //En este caso, se están mapeando las propiedades contador y parImpar del store al componente.
+    ...mapState(useStore, ['pokemonTeamData','pokemonTeamSprites','index'])
+  }, 
+  methods: {
+    //En esta sección se utiliza mapActions para mapear las acciones del store useStore en los métodos del componente. 
+    //Se esta mapeando la accion hola mundo
+    ...mapActions(useStore, ['insertarSeleccionado', 'insertarPikachu', 'vaciarSeleccion', 'vaciarEquipo'])
   },
-  created() {
+  mounted() {
     
   }
 };

@@ -1,0 +1,30 @@
+// crear proyecto laravel
+composer create-project laravel/laravel nombreProyecto
+
+// crear modelo
+php artisan make:Model NombreModelo 
+				    -m // modelo + migracion
+				    -a // modelo, migración, seeder, Factory y controlador resource
+
+// crear migracion unicamente
+php artisan make:migration create_nombres_table
+
+// crear seeder
+php artisan make:seeder NombreSeeder
+
+// crear factory
+php artisan make:factory NombreFactory
+
+// introducir datos en la bbdd
+php artisan migrate:fresh 
+php artisan db:seed
+
+// instalar breeze
+composer require laravel/breeze --dev
+php artisan breeze:install
+> blade 
+> no 
+> php (0)
+php artisan migrate
+npm install
+npm run dev

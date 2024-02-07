@@ -1,0 +1,18 @@
+// cargo el evento al abrir la pagina
+    window.addEventListener("load",eventos);
+
+    // añado el evento al link
+    function eventos(){
+	    document.getElementById("enlace").addEventListener("click", muestra)
+    }
+
+    // añado la funcion del evento
+    function muestra() {
+        var elemento = document.getElementById("adicional")
+        elemento.className = "visible-color";
+
+        var elemento2 = document.getElementById("enlace")
+        elemento2.className = "oculto-color";
+    }
+
+

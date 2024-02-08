@@ -1,8 +1,11 @@
 // crear proyecto laravel
 composer create-project laravel/laravel nombreProyecto
 
+// actualizar el composer
+composer update
+
 // crear modelo
-php artisan make:Model NombreModelo 
+php artisan make:Model NombreModelo
 				    -m // modelo + migracion
 				    -a // modelo, migración, seeder, Factory y controlador resource
 
@@ -16,14 +19,14 @@ php artisan make:seeder NombreSeeder
 php artisan make:factory NombreFactory
 
 // introducir datos en la bbdd
-php artisan migrate:fresh 
+php artisan migrate:fresh
 php artisan db:seed
 
 // instalar breeze
 composer require laravel/breeze --dev
 php artisan breeze:install
-> blade 
-> no 
+> blade
+> no
 > php (0)
 php artisan migrate
 npm install

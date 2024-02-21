@@ -115,7 +115,7 @@ export default {
     insertar() {
 
     },
-    ...mapWritableState(useCounterStore, ['counter']),
+    //...mapWritableState(useCounterStore, ['counter']),
     ...mapActions(useStore, ['insertarSeleccionado', 'insertarPikachu', 'vaciarSeleccion', 'vaciarEquipo'])
   },
   created() {

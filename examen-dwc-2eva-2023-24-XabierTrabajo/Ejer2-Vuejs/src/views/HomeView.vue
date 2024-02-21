@@ -1,15 +1,15 @@
 <script>
-import HelloWorld from '../components/HelloWorld.vue'
+import BasurtoComponent from '../components/BasurtoComponent.vue';
 export default{
   name: 'HomeView',
   components: {
-    HelloWorld
+    BasurtoComponent
   }
 }
 </script>
 
 <template>
   <main>
-    <HelloWorld />
+    <BasurtoComponent />
   </main>
 </template>

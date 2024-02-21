@@ -1,22 +1,18 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Ahora estás en about</h1>
+    <hr>
+    <h1>Orain about orrialdean zaude</h1>
+
   </div>
 </template>
 
-<script>
-  import axios from 'axios';
-  export default {
-      
-      data(){
-        return{
-          
-        }
-      },
-      mounted() {
-      },
-    methods:{
-      
-      }
-    }
-</script>
+<style>
+@media (min-width: 1024px) {
+  .about {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+}
+</style>

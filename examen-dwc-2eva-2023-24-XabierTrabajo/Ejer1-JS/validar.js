@@ -48,8 +48,12 @@ function validar() {
         alert("Escribe un pabellon valido");
     }
 
+    // crea el servicio y lo mete en el array
     let servicioObjeto = new Servicio(servicio, pabellon, visible);
     servicios.push(servicioObjeto);
-    Servicio.mostrarInfo();
+    // muestra el objeto creado
+    //servicioObjeto.mostrarInfo();
+    console.log(servicioObjeto.mostrarInfo());
+    
 }
 

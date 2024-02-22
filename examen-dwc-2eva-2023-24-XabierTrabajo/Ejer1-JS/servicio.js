@@ -32,15 +32,6 @@ class Servicio {
 
     // Método mostrar
     mostrarInfo() {
-        /*
-        // añade la respuesta correcta a la lista
-        const respuestasCorrectas = document.body.appendChild(document.createElement("li"));
-        respuestasCorrectas.textContent = "Correcto! Cantante/grupo: "+ pregunta +" Categoría: "+ categoria;
-        */
-        //document.getElementById("demo").innerHTML = ""+ servicios[0].servicio + " " + servicios[0].pabellon + " " + servicios[0].visible;
-        for (let i = 0; i < servicios.length; i++) {
-            return `${servicios[i].servicio} ${servicios[0].pabellon} ${servicios[0].visible}`
-            
-        }
+        return  `${this.servicio} ${this.pabellon} ${this.visible}`;
     }
 }

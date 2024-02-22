@@ -17,10 +17,11 @@
 
 <template>
   <div>
-    <h1 class="green">{{ msg }}</h1>
-    <h2>ESTÁS EN HELLOWORLD</h2>
+    <img src="../assets/TX.jpg" alt="TX">
+    <img src="../assets/euskadi-azul.jpg" alt="euskadi">
+    <h2>Ongi etorri CIFP Txurdinaga LHII-ko turismo orrira</h2>
     <h3>
-      Cuerpo del componente HelloWorld!!    
+      Esta aplicación utiliza datos abiertos del Gobierno Vasco, Open Data Euskadi, para su desarrollo
     </h3>
   </div> 
 </template>

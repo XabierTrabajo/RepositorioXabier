@@ -47,8 +47,7 @@
     data() {
       return {
         servicios: [],
-        busqueda: "",
-        marcado: false
+        busqueda: ""
       }
     },
     methods:{
@@ -61,7 +60,6 @@
         console.log(this.servicios);
       },
       marcarFavorito(svc) {
-        this.marcado = !this.marcado;
         this.controlFavoritos(svc);
       },
       ...mapActions(useCounter, ['controlFavoritos'])
@@ -71,7 +69,7 @@
       filtroServicios() {
         return this.servicios.filter((servicio) => servicio.SERVICIO.toUpperCase().includes(this.busqueda.toUpperCase()));
       },
-      ...mapState(useCounter, ['serviciosFavoritos'])
+      ...mapState(useCounter, ['serviciosFavoritos', 'marcado'])
     },
     created() {
       this.cargarServicios();

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>¡Bienvenido al juego de los Goya 2023!</h2>
+    <input disabled="disabled" id="pelicula" size="50">
+    <select id="premios">
+      <option value="0">Mejor película</option>
+      <option value="1">Mejor película de animación</option>
+      <option value="2">Mejor película documental</option>
+      <option value="3">Cortometraje documental</option>
+      <option value="4">Cortometraje de animación</option>
+      <option value="5">Cortometraje de ficción</option>
+    </select>
+    <button id="boton">Comprobar</button>
+    <h3 id="mensaje"></h3>
+  </body>
+  <script>
+    //Aquí va la clase PeliculaPremio
+
+    //Arrays de películas y premios
+    //Cada película y premio se corresponden uno a uno: 
+    //As bestas con Mejor película, Unicorn war con Mejor película de animación, etc.
+    const peliculas = [
+      "As bestas",
+      "Unicorn war",
+      "Labordeta, un hombre sin más",
+      "Maldita",
+      "The loop",
+    ];
+
+    const premios = [
+      "Mejor película",
+      "Mejor película de animación",
+      "Mejor película documental",
+      "Cortometraje documental",
+      "Cortometraje de animación",
+      "Cortometraje de ficción",
+    ];
+
+    const arrayPeliculas = [];
+
+    //Script de la aplicación
+
+    var intentos = 3;
+    var random = Math.floor(Math.random() * peliculas.length);
+
+
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+      event.preventDefault();
+      document.getElementById("boton").addEventListener("click", comprobar);
+
+      mostrarPregunta();
+    }
+
+    function mostrarPregunta() {
+      document.getElementById("pelicula").value = peliculas[random];
+    }
+
+    function comprobar() {
+      var respuestaPremios = document.getElementById("premios").value;
+
+      if (respuestaPremios == random) {
+        console.log("Pregunta: " + random + " Respuesta: " + respuestaPremios);
+
+        // añade la respuesta al array
+        //document.getElementById("mensaje").innerHTML = "La pelicula " + peliculas[random] + " ha ganado el premio " + premios[random];
+        let objetoPelicula = new Pelicula(peliculas[random],premios[random]);
+        arrayPeliculas.push(objetoPelicula);  
+        // muestra la respuesta y bloquea el boton
+        document.getElementById("mensaje").innerHTML = arrayPeliculas.toString();
+        document.getElementById("boton").setAttribute("disabled","");
+      }
+      else {
+        console.log("Pregunta: " + random + " Respuesta: " + respuestaPremios);
+        intentos--;
+        
+        if (intentos > 0) {
+          alert("Incorrecto! Te quedan "+ intentos +" intentos.");
+          document.getElementById("premios").focus();
+        }
+        else {
+          alert("No te quedan intentos! Se acabó el juego.")
+          document.getElementById("boton").setAttribute("disabled","");
+        }
+      }
+
+      
+    }
+
+
+    class Pelicula {
+      // Constructor
+      constructor(pelicula, premio) {
+        this._pelicula = pelicula;
+        this._premio = premio;
+      }
+
+      // Getters
+      get pelicula() {
+        return this._pelicula;
+      }
+      get premio() {
+        return this._premio;
+      }
+      // Setters
+      set pelicula(pelicula) {
+        this._pelicula = pelicula;
+      }
+      set premio(premio) {
+        this._premio = premio;
+      }
+
+      toString() {
+        return `La pelicula ${this.pelicula} ha ganado el premio ${this.premio}`;
+      }
+    }
+  </script>
+  
+  </html>

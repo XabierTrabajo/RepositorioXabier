@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego Grammys</title>
+</head>
+<body>
+
+  <h1>Juego de Preguntas de los Grammy 2024</h1>
+
+  <!-- En este div hay que incluir la pregunta -->
+  <div id="preguntaDiv">
+    <strong>En este div va la pregunta</strong>
+  </div>
+
+  <p>Selecciona el cantante/grupo del premio y haz clic en el botón para comprobar:</p>
+  <label for="cantanteSelect">Selecciona cantante/grupo:</label>
+  <select id="cantanteSelect">
+    <option value="">Selecciona opción</option>
+    <option value="Taylor Swift">Taylor Swift</option>
+    <option value="Victoria Monet">Victoria Monet</option>
+    <option value="Billie Eilish">Billie Eilish</option>
+    <option value="Killer Mike">Killer Mike</option>
+    <option value="SZA">SZA</option>
+    <option value="Miley Cirus">Miley Cirus</option>
+    <option value="Boygenius">Boygenius</option>
+    <option value="Metallica">Metallica</option>
+    <option value="Paramore">Paramore</option>
+    <option value="Julian Marley">Julian Marley</option>
+  </select>
+  
+  <button id="btnComprobar" onclick="comprobarRespuesta()">Comprobar</button>
+
+  <!-- En este ul hay que ir añadiendo los li nuevos cuando la respuesta es correcta -->
+  <ul id="respuestasCorrectas"></ul>
+
+  <script>
+
+  // Array de objetos con información del autor/a y categoría
+    const grammys = [
+      { autor: 'Taylor Swift', categoria: 'Album del año' },
+      { autor: 'Victoria Monet', categoria: 'Artista nuevo' },
+      { autor: 'Billie Eilish', categoria: 'Canción del año' },
+      { autor: 'Killer Mike', categoria: 'Album de Rap' },
+      { autor: 'SZA', categoria: 'Grupo pop' },
+      { autor: 'Miley Cirus', categoria: 'Interpretación vocal solista' },
+      { autor: 'Boygenius', categoria: 'Música Alternativa' },
+      { autor: 'Metallica', categoria: 'Interpretación de Metal' },
+      { autor: 'Paramore', categoria: 'Album rock' },
+      { autor: 'Julian Marley', categoria: 'Album Reggae' }
+    ];
+
+    // Aquí debes incluir el código JavaScript del ejercicio
+    let intentos  = 0;
+    let aciertos = 0;
+    let pregunta  = "";
+    let categoria = "";
+    // carga al iniciar la vista
+    window.addEventListener("load",pedirPregunta);
+
+    // muestra la pregunta
+    function pedirPregunta() {
+      
+      // numero aleatorio que se encarga de decidir la pregunta
+      let random = Math.floor(Math.random() * grammys.length);
+      document.getElementById("preguntaDiv").innerHTML = "Indica el cantante/grupo ganador de la categoría => "+grammys[random].autor + grammys[random].categoria;
+      // guarda la pregunta para la comprobacion
+      pregunta = grammys[random].autor;
+      categoria = grammys[random].categoria;
+    }
+
+    
+    function comprobarRespuesta() {
+      let cantanteSelect = document.getElementById("cantanteSelect").value;
+
+      // si es correcto
+      if (pregunta == cantanteSelect) {
+        console.log("Correcto");
+        alert("Correcto!");
+        aciertos++;
+
+        // añade la respuesta correcta a la lista
+        const respuestasCorrectas = document.body.appendChild(document.createElement("li"));
+        respuestasCorrectas.textContent = "Correcto! Cantante/grupo: "+ pregunta +" Categoría: "+ categoria;
+
+        //resetSelect();
+        pedirPregunta();
+        intentos++;
+      }
+      // si es incorrecto
+      else {
+        console.log("Incorrecto");
+        alert("Incorrecto! El cantante/grupo era: "+ pregunta);
+        intentos++;
+        
+        //resetSelect();
+        pedirPregunta();
+      }
+
+      if (intentos == 5) {
+        alert("Juego terminado. Has tenido "+ aciertos +" Respuestas correctas.");
+        document.getElementById("btnComprobar").setAttribute("disabled","");
+      }
+    }
+
+    function resetSelect() {
+      let cantanteSelect = document.getElementById("cantanteSelect");
+      cantanteSelect.selectedIndex(0)
+    }
+
+    
+
+  </script>
+
+</body>
+</html>

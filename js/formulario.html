@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - JS</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>DATOS DEL USUARIO</h1>
+    <form>
+        <label for="user">Nombre usuario</label>
+        <input type="text" name="user" id="user">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email"><br>
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" id="password">
+        <label for="password2">Repetir Contraseña</label>
+        <input type="password" name="password2" id="password2">
+        <br><br><br>
+        <label for="captcha">Introduce el Captcha: <span id="captchaPregunta"></span></label>
+        <input type="number" name="captcha" id="captcha">
+        <br><br><br>
+        <button id="enviar">Registrarse</button>
+    </form>
+</body>
+</html>
+<script>
+// cargo el evento al abrir la pagina
+window.addEventListener("load",eventos);
+
+// añado el evento al link
+function eventos(){
+    event.preventDefault();
+    document.getElementById("enviar").addEventListener("click", validar);
+
+    generarCaptcha();
+}
+
+// necesita estar la variable definida fuera
+var suma = 0;
+function generarCaptcha() {
+    // captcha
+    let num1 = Math.floor(Math.random() * 10);
+    let num2 = Math.floor(Math.random() * 10);
+
+    suma = num1 + num2;
+    document.getElementById("captchaPregunta").innerHTML = `${num1} + ${num2} = `;
+}
+
+function validar(){
+    event.preventDefault();
+    let user = document.getElementById("user").value;
+    let email = document.getElementById("email").value;
+    let contrasena = document.getElementById("password").value;
+    let contrasena2 = document.getElementById("password2").value;
+    let captcha = document.getElementById("captcha").value;
+    const regexPass = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,30}$/;
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Usuario
+    if (user == "" || user == " " || user == null) {
+        console.log("Usuario inválido!");
+        errorUser();
+        return false;
+    }
+    else {
+        console.log("Usuario válido!");
+        resetErrorUser();
+    }
+
+    function errorUser() {
+        // centrar en el user incorrecto
+        document.getElementById("user").focus();
+        // cambiar color de error
+        document.getElementById("user").style.backgroundColor = "red";
+        document.getElementById("user").style.color = "white";
+    }
+
+    function resetErrorUser () {
+        // eliminar el estilo del error
+        document.getElementById("user").removeAttribute("style");
+    }
+
+    // email
+    if (regexEmail.test(email)) {
+        console.log("Email válido!");
+        resetErrorEmail();
+    }
+    else {
+        console.log("Email inválido!");
+        errorEmail();
+        return false;
+    }
+
+    function errorEmail() {
+        // centrar en el email incorrecto
+        document.getElementById("email").focus();
+        // cambiar color de error
+        document.getElementById("email").style.backgroundColor = "red";
+        document.getElementById("email").style.color = "white";
+    }
+
+    function resetErrorEmail () {
+        // eliminar el estilo del error
+        document.getElementById("email").removeAttribute("style");
+    }
+
+    // contrasena 
+    if (regexPass.test(contrasena) && regexPass.test(contrasena2)) {
+        console.log("Contraseñas válidas!");
+
+        if (contrasena == contrasena2) {
+            console.log("Contraseñas correctas!");      
+            resetError();
+        }
+        else {
+            console.log("Contraseñas incorrectas!");
+            error();
+            resetPass();
+            return false;
+        }
+    } 
+    else {
+        console.log("Contraseñas inválidas!");
+        error();
+        resetPass();
+        return false;
+    }
+
+    function error() {
+        // centrar en la contraseña incorrecta
+        document.getElementById("password").focus();
+        // cambiar color de error
+        document.getElementById("password").style.backgroundColor = "red";
+        document.getElementById("password").style.color = "white";
+        document.getElementById("password2").style.backgroundColor = "red";
+        document.getElementById("password2").style.color = "white";
+    }
+
+    function resetError () {
+        // eliminar el estilo del error
+        document.getElementById("password").removeAttribute("style");
+        document.getElementById("password2").removeAttribute("style");
+    }
+
+    function resetPass() {
+        // reseteo las contraseñas
+        document.getElementById("password").value = "";
+        document.getElementById("password2").value = "";
+        
+    }
+
+    // captcha
+    if(captcha == suma) {
+        console.log("Captcha válido!");
+        console.log("Captcha " +captcha + "suma" + suma);
+        resetErrorCaptcha();
+    }
+    else {
+        console.log("Captcha inválido!");
+        console.log("Captcha: " + captcha + " Suma: " + suma);
+        generarCaptcha();
+        errorCaptcha();
+        return false;
+    }
+
+    function errorCaptcha() {
+        // centrar en el captcha incorrecto
+        document.getElementById("captcha").focus();
+        // cambiar color de error
+        document.getElementById("captcha").style.backgroundColor = "red";
+        document.getElementById("captcha").style.color = "white";
+        // resetea el campo
+        document.getElementById("captcha").value = "";
+    }
+
+    function resetErrorCaptcha () {
+        // eliminar el estilo del error
+        document.getElementById("captcha").removeAttribute("style");
+    }
+    
+    // si todo esta bien
+    alert("Te has registrado!");
+    
+}
+</script>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>¡Bienvenido a los Oscar 2024!</h2>
+    <select id="peliculas">
+      <option value="0">As bestas</option>
+      <option value="1">Unicorn war</option>
+      <option value="2">Labordeta, un hombre sin más</option>
+      <option value="3">Maldita</option>
+      <option value="4">The loop</option>
+    </select>
+    <button id="boton">Comprobar</button>
+    <h3 id="mensaje"></h3>
+
+
+    <br><br><br>
+
+
+    <select id="nominaciones">
+      <option value="Mejor pélicula">Mejor pélicula</option>
+      <option value="Mejor actor">Mejor actor</option>
+      <option value="Mejor director">Mejor director</option>
+      <option value="Mejor película documental">Mejor película documental</option>
+      <option value="Cortometraje documental">Cortometraje documental</option>
+      <option value="Cortometraje de animación">Cortometraje de animación</option>
+      <option value="Prueba de fallo">Prueba de fallo</option>
+    </select>
+    <button id="botonNominaciones">Comprobar</button>
+    <h3 id="mensajePeliculas"></h3>
+  </body>
+  <script>
+    //Aquí va la clase PeliculaPremio
+
+    //Arrays de películas y premios
+    //Cada película y premio se corresponden uno a uno: 
+    //As bestas con Mejor película, Unicorn war con Mejor película de animación, etc.
+    const peliculas = [
+      "As bestas",
+      "Unicorn war",
+      "Labordeta, un hombre sin más",
+      "Maldita",
+      "The loop",
+    ];
+
+    const premios = [
+      "Mejor película",
+      "Mejor película de animación",
+      "Mejor película documental",
+      "Cortometraje documental",
+      "Cortometraje de animación",
+      "Cortometraje de ficción",
+    ];
+
+    const arrayPeliculas = [];
+
+    const infoPeliculas = [
+      {
+        id: 0,
+        title: "As bestas",
+        prize: "Mejor película",
+        nominations: [
+          "Mejor pélicula",
+          "Mejor actor",
+          "Mejor director"
+        ]
+      },
+      {
+        id: 1,
+        title: "Unicorn war",
+        prize: "Mejor película de animación",
+        nominations: [
+          "Mejor película de animación",
+          "Mejor actor"
+        ]
+      },
+      {
+        id: 2,
+        title: "Labordeta, un hombre sin más",
+        prize: "Mejor película documental",
+        nominations: [
+          "Mejor película documental",
+          "Mejor actor",
+          "Mejor director"
+        ]
+      },
+      {
+        id: 3,
+        title: "Maldita",
+        prize: "Cortometraje documental",
+        nominations: [
+          "Cortometraje documental",
+          "Mejor director"
+        ]
+      },
+      {
+        id: 4,
+        title: "Maldita",
+        prize: "Cortometraje de animación",
+        nominations: [
+          "Cortometraje de animación",
+          "Mejor director"
+        ]
+      }
+    ];
+
+    //Script de la aplicación
+    
+    
+
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+      event.preventDefault();
+      document.getElementById("boton").addEventListener("click", ver);
+      document.getElementById("botonNominaciones").addEventListener("click", verNominaciones);
+      
+    }
+
+    function ver() {
+      // variables
+      let nominations = "";
+      var msg = document.getElementById("mensaje");
+      var selectPelicula = document.getElementById("peliculas").value;
+
+      // busca y escribe las nominaciones de la pelicula seleccionada
+      for (let i = 0; i < infoPeliculas[selectPelicula].nominations.length; i++) {
+        let singleNomination = infoPeliculas[selectPelicula].nominations[i];
+        nominations = nominations + singleNomination + ", ";
+      }
+      
+      // rellena el mensaje y junta las nominaciones
+      msg.innerHTML = `
+        La película ${infoPeliculas[selectPelicula].title} ha ganado el premio ${infoPeliculas[selectPelicula].prize} y ha sido nominada en: <br>
+        ${nominations}
+      `;
+    }
+
+    function verNominaciones() {
+      // variables
+      var msgPeliculas = document.getElementById("mensajePeliculas");
+      var selectNominacion = document.getElementById("nominaciones").value;
+      let intentos = 0;
+      let peliculas = "";
+      // busca entre las peliculas si hay alguna coincidencia
+      for (let i = 0; i < infoPeliculas.length; i++) {
+        // si coincide la nominacion
+        if (infoPeliculas[i].nominations.includes(selectNominacion)) {
+          let singlePelicula = infoPeliculas[i].title;
+          peliculas = peliculas + singlePelicula + ", ";
+        }
+
+        else {
+          console.log("Sin resultados. Reintentando...");
+          intentos++;
+        }
+      }
+      if (intentos == infoPeliculas.length) {
+        msgPeliculas.innerHTML = `No se han encontrado películas nominadas al premio ${selectNominacion}.`;
+      }
+      else {
+        msgPeliculas.innerHTML = `${peliculas} ha(n) sido nominada(s) al premio ${selectNominacion}`;
+      }
+    }
+  </script>
+  
+  </html>

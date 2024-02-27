@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Varios de JS</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    /*
+    Objetos Nativos de Javascript
+    -Objeto Date.- Calcular el tiempo restante en milisegundos entre la fecha actual y la fecha Maya del fin del mundo (21 de Diciembre de 2012).
+    -Objeto Math.- Calcular el área de un círculo tras solicitar el radio desde un cuadro de diálogo.
+    -Objeto Number.- Mostrar el valor de la constante Pi formateado a 4 decimales.
+    -Objeto String.- Solicitar una cadena de texto desde teclado, presentar el número de caracteres que contiene y presentar la propia cadena en cursiva, en itálica y en tachado.
+    -Objeto Array.- Solicitar una frase desde teclado, almacenar cada palabra en un array y mostrar los siguientes datos:
+        - La primera palabra de la frase.
+        - La última palabra de la frase.
+        - El número de palabras de la frase.
+        - Todas las palabras ordenadas alfabéticamente.
+
+    */
+
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load",eventos);
+
+    // añado el evento al link
+    function eventos(){
+        ejercicioDate();
+        //ejercicioMath();
+        ejercicioNumber();
+        //ejercicioString();
+        //ejercicioArray();
+        ejercicioDivisible();
+    }
+
+    function ejercicioDate() {
+        const fechaActual = new Date();
+        const finMundo = new Date(2012, 12, 21);
+        const diferencia = fechaActual - finMundo;
+
+        console.log("Diferencia temporal en milisegundos respecto a la fecha actual y el 21/12/2012: "+diferencia);
+    }
+
+    function ejercicioMath() {
+        const r = prompt("Escribe el radio del circulo para saber el area.");
+        const area = Math.PI*r*r;
+        const perimetro = 2*Math.PI*r;
+
+        console.log(`El área del circulo de radio ${r} es: ${area}`)
+    }
+
+    function ejercicioNumber() {
+        const n = Math.PI.toFixed(4);
+
+        console.log("El número PI con 4 decimales: "+n)
+    }
+
+    function ejercicioString() {
+        const string = prompt("Escribe una frase.");
+        const cantChar = string.length;
+        const stringItalic = string.italics();
+
+
+        console.log(`La frase tiene ${cantChar} caracteres.`);
+        console.log(`La frase en cursiva: ${stringItalic}`);
+    }
+
+    function ejercicioArray() {
+        let string = prompt("Escribe una frase.");
+        let array = [];
+        let inicio = "";
+        let final = "";
+        let cantArray = 0;
+
+        // mete la palabra en el array y obtiene los posiciones del principio y final
+        array.push(string);
+        inicio = array[0].charAt(0);
+        final = array[0].charAt(array.length);
+        // longitud de la frase
+        cantArray = string.length;
+        // ordena las palabras
+        // solo tiene 1 elemento asi que por eso no funciona
+        array.sort();
+
+        console.log(`La letra inicial es: ${inicio} y la final es: ${final}`);
+        console.log(`La longitud de la frase es: ${cantArray}`);
+        console.log(`La frase ordenada es: ${array}`);
+    }
+
+    function ejercicioDivisible() {
+        let n = prompt("Escribe un numero del 1 al 100");
+        
+        if (n > 0 && n <101) {
+            if (n % 2 == 0) {
+                console.log(n+" es divisible entre 2");
+            }
+
+            if (n % 3 == 0) {
+                console.log(n+" es divisible entre 3");
+            }
+
+            if (n % 5 == 0) {
+                console.log(n+" es divisible entre 5");
+            }
+
+            if (n % 10 == 0) {
+                console.log(n+" es divisible entre 10");
+            }
+        }
+        else {
+            alert("Escribe un numero del 1 al 100")
+        }
+    }
+</script>

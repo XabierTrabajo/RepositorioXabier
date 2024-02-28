@@ -30,6 +30,7 @@
           <button @click="vender(producto)">-</button>
         </td>
         <td><input type="number" disabled v-model="counter"></td>
+        <!-- <td><input type="number" disabled v-bind:value="productosComprados[]"></td> -->
       </tr>
     </table>
 
@@ -117,6 +118,7 @@
         if (i > -1) {
           console.log("Ese articulo ya está comprado! Añadiendo una nueva unidad...");
           this.productosComprados[i].units++;
+          this.counter = this.productosComprados[i].units;
 
           alert("El articulo "+ articulo.title +" ya ha sido comprado. Se añadirá una nueva unidad.");
         }
@@ -147,6 +149,8 @@
           if (this.productosComprados[i].units == 0) {
             this.productosComprados.splice(i , 1);
           }
+
+          this.total = this.total - articulo.price;
         }
 
         // si no esta en el carrito lo añado
@@ -156,7 +160,7 @@
           alert("El articulo "+ articulo.title +" aún no ha sido comprado. Operación cancelada");
         }
 
-        this.total = this.total - articulo.price;
+        
       }
     },
     computed: {

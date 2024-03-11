@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 4</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let n = prompt("Escribe un numero de entre el 1 al 100 para saber sus tablas de multiplicar y dividir.");
+    if (n > 0 && n < 101) {
+        sumar(n);
+        multiplicar(n);
+        dividir(n);
+    }
+    else {
+        alert("Escribe un numero de entre el 1 al 100!");
+    }
+
+    function sumar(num) {
+        let respuestas = "";
+        for (let i = 1; i < 11; i++) {
+            // js interpreta algun dato como string y lo concatena en lugar de sumarlo. Number transforma el string a numero
+            let resultado = Number(num) + Number(i);
+            respuestas += `${num} + ${i} = ${resultado} \n`;
+            
+        }
+        alert(respuestas);
+    }
+
+    function multiplicar(num) {
+        let respuestas = "";
+        for (let i = 1; i < 11; i++) {
+            let resultado = num * i;
+            respuestas += `${num} x ${i} = ${resultado} \n`;
+            
+        }
+        alert(respuestas);
+    }
+
+    function dividir(num) {
+        let respuestas = "";
+        for (let i = 1; i < 11; i++) {
+            let resultado = num / i;
+            respuestas += `${num} / ${i} = ${resultado} \n`;
+            
+        }
+        alert(respuestas);
+    }
+</script>

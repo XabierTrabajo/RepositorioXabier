@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 6</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let cantidad = Math.floor(Math.random() * (500 - 1000) + 500);
+    let numerosGuardados = [];
+    contadorInterno = 0;
+    contadorMasRepetido = 0;
+
+    for (let i = 0; i < cantidad; i++) {
+        let valor = Math.floor(Math.random() * 50);
+        numerosGuardados.push(valor);
+    }
+
+    console.log(numerosGuardados);
+
+    // busca el numero mas frecuente
+    numerosGuardados.map(x => {
+        contadorInterno = 0;
+        numerosGuardados.map(y => {
+            if (x === y) {
+                contadorInterno++;
+            }
+        })
+
+        if (contadorInterno > contadorMasRepetido) {
+            contadorMasRepetido = contadorInterno;
+            variable = x;
+        }
+    });
+
+    console.log(`valor mas repetido:${variable}, numero de veces contada: ${contadorMasRepetido}`);
+</script>

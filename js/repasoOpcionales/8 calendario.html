@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 8</title>
+</head>
+
+<body>
+    <div id="calendario">
+        <span id="ano">2000</span>
+        <h1 id="dia">1</h1>
+        <span id="mes">Enero</span>
+    </div>
+</body>
+
+</html>
+<script>
+    const fecha = new Date();
+    let dia; let mes; let ano; let mesTexto;
+
+    dia = fecha.getDate();
+    mes = fecha.getMonth();
+    ano = fecha.getFullYear();
+
+    // para poner el mes como texto
+    switch (mes) {
+        case 0:
+            mesTexto = "Enero";
+            break;
+        case 1:
+            mesTexto = "Febrero";
+            break;
+        case 2:
+            mesTexto = "Marzo";
+            break;
+        case 3:
+            mesTexto = "Abril";
+            break;
+        case 4:
+            mesTexto = "Mayo";
+            break;
+        case 5:
+            mesTexto = "Junio";
+            break;
+        case 6:
+            mesTexto = "Julio";
+            break;
+        case 7:
+            mesTexto = "Agosto";
+            break;
+        case 8:
+            mesTexto = "Septiembre";
+            break;
+        case 9:
+            mesTexto = "Octubre";
+            break;
+        case 10:
+            mesTexto = "Noviembre";
+            break;
+        case 11:
+            mesTexto = "Diciembre";
+            break;
+
+        default:
+            mesTexto = "---";
+            break;
+    }
+
+    document.getElementById("dia").innerHTML = dia;
+    document.getElementById("mes").innerHTML = mesTexto;
+    document.getElementById("ano").innerHTML = ano;
+    console.log(fecha);
+    
+</script>
+<style>
+    #calendario {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 300px;
+        margin-left: 45%;
+        width: 10%;
+
+        border: 2px solid gray;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+        text-align: center;
+    }
+
+    #ano, #mes {
+        background-color: aqua;
+        width: 100%;
+
+    }
+
+    #dia {
+        background-color: dodgerblue;
+        width: 100%;
+        margin: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>

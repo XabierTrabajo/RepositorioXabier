@@ -18,6 +18,24 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/pokemonTeam">PokéTeam</RouterLink>
         <RouterLink to="/test">Test Pinia</RouterLink>
         <RouterLink to="/pinia3">Ejercicio Pinia 3</RouterLink>
+        <RouterLink to="/ejer1HolaMundo">Ejercicio 1 Hola Mundo</RouterLink>
+        <RouterLink to="/ejercicio2Tareas">Ejercicio 2 Tareas</RouterLink>
+        <RouterLink to="/ejercicio3Pokemons">Ejercicio 3 Pokemons</RouterLink>
+        <RouterLink to="/ejercicio4a">Ejercicio 4 Inicio</RouterLink>
+        <RouterLink to="/ejercicio4b">Ejercicio 4 Requisitos</RouterLink>
+        <RouterLink to="/ejercicio4c">Ejercicio 4 Contacto</RouterLink>
+        <RouterLink to="/ejercicio5gatos">Ejercicio 5 Gatos</RouterLink>
+        <RouterLink to="/ejercicioNavidad1Listado">Ejercicio Navidad 1 Listado</RouterLink>
+        <RouterLink to="/ejercicioNavidad2Peliculas">Ejercicio Navidad 2 Peliculas</RouterLink>
+        <RouterLink to="/ejercicioNavidad3InputPinia">Ejercicio Navidad 3 Input Pinia</RouterLink>
+        <RouterLink to="/ejercicioPractica1Boton">Ejercicio Practica 1 Boton</RouterLink>
+        <RouterLink to="/ejercicioPractica2MouseArea">Ejercicio Practica 2 Mouse Area</RouterLink>
+        <RouterLink to="/ejercicioPerroGato">Ejercicio Perro Gato</RouterLink>
+        <RouterLink to="/ejercicioListaCompra">Ejercicio Lista Compra</RouterLink>
+        <RouterLink to="/ejercicioTraductor">Ejercicio Traductor</RouterLink>
+        <RouterLink to="/ejercicioConstructoresJugadores">Ejercicio Constructores Jugadores</RouterLink>
+        <RouterLink to="/ejercicioGimnasio">Ejercicio Gimnasio</RouterLink>
+        
       </nav>
     </div>
   </header>

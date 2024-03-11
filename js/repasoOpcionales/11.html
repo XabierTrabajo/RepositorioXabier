@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 11</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+    let theEdificio = [];
+
+    class Edificio {
+        // Constructor
+        constructor(calle, numero, codigoPostal, piso) {
+            this._calle = calle;
+            this._numero = numero;
+            this._codigoPostal = codigoPostal;
+            this._piso = piso;
+        }
+
+        // Getters
+        get calle() {
+            return this._calle;
+        }
+        get numero() {
+            return this._numero;
+        }
+        get codigoPostal() {
+            return this._codigoPostal;
+        }
+        get piso() {
+            return this._piso;
+        }
+        // Setters
+        set calle(calle) {
+            this._calle = calle;
+        }
+        set numero(numero) {
+            this._numero = numero;
+        }
+        set codigoPostal(codigoPostal) {
+            this._codigoPostal = codigoPostal;
+        }
+        set piso(piso) {
+            this._piso = piso;
+        }
+
+        toString() {
+            return `Nuevo edificio construido: 
+            \nCalle: ${this.calle}, Numero: ${this.numero}, Codigo Postal: ${this.codigoPostal},
+            \nPisos: 
+             
+            \nNº planta: ${this.piso[0].values()}, Puerta: ${this.piso.puerta}, Propietario: ${this.piso.nombrePropietario}`;
+        }
+    }
+
+    function agregarPisos() {
+        // variables
+        let numPiso; let puertaPiso; let propietario; let arrayPisos = []; let fin = 0;
+
+        // genero datos para cada piso
+        for (let i = 0; i < 4; i++) {
+            numPiso = i;
+            for (let e = 1; e < 5; e++) {
+
+                switch (e) {
+                    case 1:
+                        puertaPiso = "Puerta A";
+                        propietario = "Propietario A";
+                        break;
+                    case 2:
+                        puertaPiso = "Puerta B";
+                        propietario = "Propietario B";
+                        break;
+                    case 3:
+                        puertaPiso = "Puerta C";
+                        propietario = "Propietario C";
+                        break;
+                    case 4:
+                        puertaPiso = "Puerta D";
+                        propietario = "Propietario D";
+                        break;
+
+                    default:
+                        break;
+                }
+                
+                // preparo pa introducir los datos
+                let planta = [
+                    {
+                        numeroPlanta: numPiso,
+                        puerta: puertaPiso,
+                        nombrePropietario: propietario
+                    }
+                ];
+                // inserto los datos de 1 piso
+                arrayPisos.push(planta);
+
+            }
+            fin++;
+
+        }
+        if (fin == 4) {
+            //calle, numero, codigoPostal, piso
+            let objetoEdificio = new Edificio("C/ La Calle", 1, 40000, arrayPisos);
+            theEdificio.push(objetoEdificio);
+            console.log(theEdificio.toString());
+            console.log(theEdificio);
+            console.log(theEdificio[0].piso[0].puerta);
+        }
+        
+    }
+
+    function modificarNumero(nuevoNumero) {
+        theEdificio[0].numero = nuevoNumero;
+    }
+    function modificarCalle(nuevaCalle) {
+        theEdificio[0].calle = nuevaCalle;
+    }
+    function modificarCodigoPostal(nuevoCP) {
+        theEdificio[0].codigoPostal = nuevoCP;
+    }
+
+    agregarPisos();
+</script>

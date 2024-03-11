@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 9</title>
+</head>
+
+<body>
+    <div>
+        <h1 id="reloj"><span id="hora">00</span>:<span id="minuto">00</span>:<span id="segundo">00</span></h1>
+    </div>
+</body>
+
+</html>
+<script>
+    const fecha = new Date();
+    let hora    = fecha.getHours(); 
+    let minuto  = fecha.getMinutes(); 
+    let segundo = fecha.getSeconds();
+
+    let horaTXT; let minutoTXT; let segundoTXT;
+
+    function reloj() {
+        
+
+        segundo = segundo + 1;
+
+        if (segundo == 60) {
+            segundo = 0;
+            minuto = minuto + 1;
+
+            if (minuto == 60) {
+                minuto = 0;
+                hora = hora + 1;
+
+                if (hora == 24) {
+                    hora = 0;
+                }
+            }
+        }
+
+        if (segundo < 10) {
+            segundoTXT = "0" + segundo;
+        }
+
+        else {
+            segundoTXT = segundo;
+        }
+
+        if (minuto < 10) {
+            minutoTXT = "0" + minuto;
+        }
+
+        else {
+            minutoTXT = minuto;
+        }
+
+        if (hora < 10) {
+            horaTXT = "0" + hora;
+        }
+
+        else {
+            horaTXT = hora;
+        }
+
+        document.getElementById("hora").innerHTML = horaTXT;
+        document.getElementById("minuto").innerHTML = minutoTXT;
+        document.getElementById("segundo").innerHTML = segundoTXT;        
+        console.log(`Funcion ejecutada. El tiempo es:  ${hora}:${minuto}:${segundo}`)
+    }
+    setInterval(reloj, 1000);
+    
+</script>
+<style>
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 300px;
+        margin-left: 45%;
+        width: 25%;
+
+        border: 2px solid gray;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+        text-align: center;
+    }
+
+    #reloj {
+        background-color: dodgerblue;
+        width: 100%;
+        margin: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>

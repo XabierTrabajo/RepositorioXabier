@@ -24,12 +24,13 @@
         <!--La ruta relativa ../ no funciona en este caso por algun motivo-->
         <td><img v-bind:src="producto.image" v-bind:alt="producto.image" style="width: 35px; height: 35px;"></td>
         <td>{{ producto.title }}</td>
-        <td>{{ producto.price }}</td>
+        <td>{{ producto.price }} €</td>
         <td>
           <button @click="comprar(producto)">+</button>
           <button @click="vender(producto)">-</button>
         </td>
-        <td><input type="number" disabled v-model="counter"></td>
+        <!-- Comprueba si el producto esta comprado, si encuentra el producto muestra sus unidades -->
+        <td><input type="number" disabled v-bind:value="productosComprados.findIndex( e=> e.title == producto.title) != -1 ? productosComprados[productosComprados.findIndex( e=> e.title == producto.title)].units : 0"></td>
       </tr>
     </table>
 
@@ -38,22 +39,31 @@
     <br><br><br>
     <button>Imprimir factura</button><br>
     <div>
-      <h2>Total de compra: {{ total }}</h2>
+      <h2>Total de compra: {{ total }} €</h2>
 
       <table>
-      <tr>
-          <th>Modelo</th>
-          <th>Precio</th>
-          <th>Unidades seleccionadas</th>
-          <th>Subtotal</th>
-      </tr>
-      <tr v-for="producto in productosComprados">
-        <td>{{ producto.title }}</td>
-        <td>{{ producto.price }}</td>
-        <td><input type="number" disabled v-bind:value="producto.units"></td>
-        <td><input type="number" disabled v-bind:value="producto.units * producto.price"></td>
-      </tr>
-    </table>
+        <tr>
+            <th>Modelo</th>
+            <th>Precio</th>
+            <th>Unidades seleccionadas</th>
+            <th>Subtotal</th>
+        </tr>
+        <tr v-for="producto in productosComprados">
+          <td>{{ producto.title }}</td>
+          <td>{{ producto.price }} €</td>
+          <td><input type="number" disabled v-bind:value="producto.units"></td>
+          <td><input type="number" disabled v-bind:value="producto.units * producto.price"></td>
+        </tr>
+      </table>
+      <br><br><br>
+      <div>
+        <h2>
+          <span>Entregado: </span>
+          <input type="number" v-model="dineroEntregado"> €
+        </h2>
+        <br><br>
+        <h2 >Cambio: {{ pago }} €</h2>
+      </div>
     </div>
 </template>
 <script>
@@ -72,7 +82,9 @@
         categoriaSelect: "",
         productosComprados: [],
         total: 0,
-        counter: 0
+
+        dineroEntregado: null,
+        dineroCambio: null
       }
     },
     methods:{
@@ -162,6 +174,10 @@
     computed: {
       filtroCategorias() {
         return this.arrayProductos.filter((producto) => producto.category.includes(this.categoriaSelect));
+      },
+
+      pago() {
+        return this.dineroCambio = this.dineroEntregado - this.total;
       },
 
       ...mapState(useCounter,['usuario','login'])

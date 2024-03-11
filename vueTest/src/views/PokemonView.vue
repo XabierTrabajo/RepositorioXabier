@@ -12,6 +12,7 @@ onMounted(()=>{
 
 <template>
   <main>
+    <h1>CONTIENE ERRORES!</h1>
     <form @submit.prevent>
       <label for="nombre">Buscar Pokémon</label>
       <input type="text" name="nombre" id="nombre" placeholder="nombre">

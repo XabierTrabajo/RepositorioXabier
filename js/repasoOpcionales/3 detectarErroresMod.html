@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 3</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let array = [1,2,3,6,5,4,7,8,9];
+    let error = null;
+    for (let i = 0; i < array.length; i++) {
+        error = array[i];
+        console.log(error);
+
+        // cuando se topa con un numero que no corresponde en el orden
+        if(error != i+1) {
+            alert(`Error en la posición ${i}. Se esperaba un ${i+1}, pero en su lugar hay un ${error}.`);
+            //i = array.length-1; //para el programa
+        }
+        
+    }
+</script>

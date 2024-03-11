@@ -4,6 +4,8 @@ import AboutView from '../views/AboutView.vue'
 import ComprasView from '../views/ComprasView.vue'
 import LoginView from '../views/LoginView.vue'
 import CochesView from '../views/CochesView.vue'
+import CalculadoraView from '../views/CalculadoraView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +34,11 @@ const router = createRouter({
       path: '/coches',
       name: 'coches',
       component: CochesView
+    },
+    {
+      path: '/calculadora',
+      name: 'calculadora',
+      component: CalculadoraView
     }
   ]
 })

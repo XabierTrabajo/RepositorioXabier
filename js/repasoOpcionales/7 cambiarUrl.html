@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 7</title>
+</head>
+<body>
+    <a href="" id="link">Link</a>
+</body>
+</html>
+<script>
+    let i = 0;
+    const urls = [
+        "https://www.youtube.com/",
+        "https://mail.google.com/",
+        ""
+    ];
+
+    function cambiarUrl() {
+        if (i == urls.length) {
+            i = 0;
+        }
+        
+        document.getElementById("link").href = urls[i];
+        console.log("Funcion ejecutada. Posicion del array: "+i);
+        i++;
+    }
+
+    setInterval(cambiarUrl, 3000);
+</script>

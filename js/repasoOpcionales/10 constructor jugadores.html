@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 10</title>
+</head>
+
+<body>
+    <div>
+        <span id="jugadores"></span>
+    </div>
+</body>
+
+</html>
+<script>
+    class Jugador {
+        // Constructor
+        // constructor() {
+        //     this._nombre = "Jugador 1";
+        //     this._numeroVidas = 3;
+        //     this._tienePistola = true;
+        //     this._tieneGranada = false;
+        //     this._numeroBalas = 30;
+        // }
+        constructor(nombre, numeroVidas, tienePistola, tieneGranada, numeroBalas) {
+            this._nombre = nombre;
+            this._numeroVidas = numeroVidas;
+            this._tienePistola = tienePistola;
+            this._tieneGranada = tieneGranada;
+            this._numeroBalas = numeroBalas;
+        }
+        
+        // Getters
+        get nombre() {
+            return this._nombre;
+        }
+        get numeroVidas() {
+            return this._numeroVidas;
+        }
+        get tienePistola() {
+            return this._tienePistola;
+        }
+        get tieneGranada() {
+            return this._tieneGranada;
+        }
+        get numeroBalas() {
+            return this._numeroBalas;
+        }
+        // Setters
+        set nombre(nombre) {
+            this._nombre = nombre;
+        }
+        set numeroVidas(numeroVidas) {
+            this._numeroVidas = numeroVidas;
+        }
+        set tienePistola(tienePistola) {
+            this._tienePistola = tienePistola;
+        }
+        set tieneGranada(tieneGranada) {
+            this._tieneGranada = tieneGranada;
+        }
+        set numeroBalas(numeroBalas) {
+            this._numeroBalas = numeroBalas;
+        }
+
+        toString() {
+            return `Nombre: ${this.nombre}, Numero de vidas: ${this.numeroVidas}
+                    \nEquipamiento: 
+                    \nTiene pistola: ${this.tienePistola}, Numero de balas: ${this.numeroBalas}, Tiene granada: ${this.tieneGranada}`;
+        }
+    }
+    // hago las validaciones de forma externa, antes de crear el objeto
+    function comprobar(nombre,numeroVidas,tienePistola,tieneGranada,numeroBalas) {
+        // variables
+        //let nombre; let numeroVidas; let tienePistola; let numeroBalas; let tieneGranada;
+        
+        if (tienePistola == false || tienePistola == "false" || tienePistola == "falso" || tienePistola == "no" || tienePistola == null || tienePistola == 0) {
+            numeroBalas = 0;
+        }
+
+        let nuevoJugador = new Jugador(nombre,numeroVidas,tienePistola,tieneGranada,numeroBalas);
+        partida.push(nuevoJugador);
+        
+        // var jugador1 = new Jugador("Jon", 5, "si", "si", 4);
+        // var jugador2 = new Jugador("Jon2", 10, "no", "si", 4);
+        // var jugador3 = new Jugador("Jon3", 2, "si", "si", 4);
+        // var jugador4= new Jugador();
+
+    }
+
+    let partida = [];
+    
+    comprobar("Jon", 5, "si", "si", 4);
+    comprobar("Jon2", 10, "no", "si", 4);
+    comprobar("Jon3", 2, "si", "si", 4);
+    comprobar("Maria", 3, "falso", "si", 999);
+    comprobar("Pepe", 999, "si", "si", 300);
+
+    console.log(partida);
+
+    for (let i = 0; i < partida.length; i++) {
+        document.getElementById("jugadores").innerHTML = document.getElementById("jugadores").innerHTML + `Nombre: ${partida[i].nombre}, Nº Vidas: ${partida[i].numeroVidas}, Tiene pistola: ${partida[i].tienePistola}, Tiene granada: ${partida[i].tieneGranada}, Nº balas: ${partida[i].numeroBalas}<br>`;    
+    }
+
+    
+   
+</script>

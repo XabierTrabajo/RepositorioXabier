@@ -12,6 +12,7 @@ onMounted(()=>{
 
 <template>    
 <main>
+  <H1>CONTIENE ERRORES!</H1>
     <form @submit.prevent>
       <div v-if="pokemonTeamData.length == 10">
         <label for="listaPokemon">Ver Pokémon</label>

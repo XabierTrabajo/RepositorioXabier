@@ -25,8 +25,13 @@
         <td v-if="svc.MOSTRAR == 1">{{ svc.SERVICIO }}</td>
         <td v-if="svc.MOSTRAR == 1">{{ svc.ENTRADA }}</td>
         <td v-if="svc.MOSTRAR == 1">
-          <img src="../assets/corazon-lleno.png" alt="corazon-lleno.png" style="width: 35px; height: 35px;" @click="marcarFavorito(svc)" v-show="marcado == true"> 
-          <img src="../assets/corazon-vacio.png" alt="corazon-vacio.png" style="width: 35px; height: 35px;" @click="marcarFavorito(svc)" v-show="marcado == false">
+          <img 
+            @click="marcarFavorito(svc)"
+            style="width: 35px; height: 35px;"
+
+            v-bind:src="serviciosFavoritos.findIndex( e=> e.SERVICIO == svc.SERVICIO) != -1 ? 'src/assets/corazon-lleno.png' : 'src/assets/corazon-vacio.png'"
+            v-bind:alt="serviciosFavoritos.findIndex( e=> e.SERVICIO == svc.SERVICIO) != -1 ? 'Favorito' : 'No favorito'"
+          ><!-- Comprueba si el servicio esta marcado como favorito, si encuentra el servicio muestra el corazon lleno, si no, el vacio -->
         </td>
       </tr>
     </table>

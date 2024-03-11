@@ -29,12 +29,13 @@
 
     // añado el evento al link
     function eventos(){
-        ejercicioDate();
+        //ejercicioDate();
         //ejercicioMath();
-        ejercicioNumber();
+        //ejercicioNumber();
         //ejercicioString();
         //ejercicioArray();
-        ejercicioDivisible();
+        //ejercicioDivisible();
+        ejercicioDivisibleMejorado();
     }
 
     function ejercicioDate() {
@@ -110,6 +111,42 @@
             if (n % 10 == 0) {
                 console.log(n+" es divisible entre 10");
             }
+
+            // concatenar en un msg cada posible caso
+        }
+        else {
+            alert("Escribe un numero del 1 al 100")
+        }
+    }
+
+    function ejercicioDivisibleMejorado() {
+        let n = prompt("Escribe un numero del 1 al 100");
+        let msg = n+" es divisible entre: "
+        let div2 = "";
+        let div3 = "";
+        let div5 = "";
+        let div10 = "";
+        
+        if (n > 0 && n <101) {
+            if (n % 2 == 0) {
+                div2 = "2 "
+            }
+
+            if (n % 3 == 0) {
+                div3 = "3 "
+            }
+
+            if (n % 5 == 0) {
+                div5 = "5 "
+            }
+
+            if (n % 10 == 0) {
+                div10 = "10 "
+            }
+
+            // concatenar en un msg cada posible caso
+            msg = msg + div2 + div3 + div5 + div10;
+            console.log(msg);
         }
         else {
             alert("Escribe un numero del 1 al 100")

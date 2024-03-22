@@ -23,7 +23,11 @@ import EjercicioListaCompraView from '../views/EjercicioListaCompraView.vue'
 import EjercicioTraductorView from '../views/EjercicioTraductorView.vue'
 import EjercicioConstructoresJugadoresJSView from '../views/EjercicioConstructoresJugadoresJSView.vue'
 import EjercicioGimnasioView from '../views/EjercicioGimnasioView.vue'
-
+import EjercicioConstructoresEdificioJSView from '../views/EjercicioConstructoresEdificioJSView.vue'
+import EjercicioScrabbleView from '../views/EjercicioScrabbleView.vue'
+import EjercicioPizzeriaView from '../views/EjercicioPizzeriaView.vue'
+import EjercicioPlaylistView from '../views/EjercicioPlaylistView.vue'
+import CalculadoraView from '../views/CalculadoraView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -155,6 +159,31 @@ const router = createRouter({
       path: '/ejercicioGimnasio',
       name: 'ejercicioGimnasio',
       component: EjercicioGimnasioView
+    },
+    {
+      path: '/ejercicioConstructoresEdificio',
+      name: 'ejercicioConstructoresEdificio',
+      component: EjercicioConstructoresEdificioJSView
+    },
+    {
+      path: '/ejercicioScrabble',
+      name: 'ejercicioScrabble',
+      component: EjercicioScrabbleView
+    },
+    {
+      path: '/ejercicioPizzeria',
+      name: 'ejercicioPizzeria',
+      component: EjercicioPizzeriaView
+    },
+    {
+      path: '/ejercicioPlaylist',
+      name: 'ejercicioPlaylist',
+      component: EjercicioPlaylistView
+    },
+    {
+      path: '/ejercicioCalculadora',
+      name: 'ejercicioCalculadora',
+      component: CalculadoraView
     }
   ]
 })

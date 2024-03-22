@@ -5,8 +5,21 @@
         <input type="submit" value="Insertar">
       </form>
       <div>
-        <h1>TAREAS COMPLETADAS: {{ contadorPendientes }}</h1>
-        <span v-for="tarea in tareas">
+        <h1>TAREAS COMPLETADAS: {{ contadorCompletados }}</h1> <button @click="completados = !completados">Ver</button> <br>
+        <span v-for="tarea in tareasStore" v-show="tarea.completado == true && completados == true">
+          <span>Nº {{ tarea.numeroTarea }} | Tarea: {{ tarea.tarea }} | Completado? <span v-if="tarea.completado == false">No</span><span v-else>Si</span></span><br>
+        </span>
+
+        <br><br>
+
+        <h1>TAREAS PENDIENTES: {{ contadorPendientes }}</h1> <button @click="porHacer = !porHacer">Ver</button> <br>
+        <span v-for="tarea in tareasStore" v-show="tarea.completado == false && porHacer == true">
+          <span>Nº {{ tarea.numeroTarea }} | Tarea: {{ tarea.tarea }} | Completado? <span v-if="tarea.completado == false">No</span><span v-else>Si</span></span><br>
+        </span>
+        
+        <br><br><br>
+        <h1>LISTA DE TAREAS</h1>
+        <span v-for="tarea in tareasStore">
           Nº {{ tarea.numeroTarea }} | Tarea: {{ tarea.tarea }} | Completado? <span v-if="tarea.completado == false">No</span><span v-else>Si</span>
           <button style="margin-left: 30px;" @click="marcar(tarea)">Hecho</button><button @click="borrar(tarea)">Eliminar</button><br>
         </span>
@@ -16,7 +29,7 @@
 </template>
 <script>
   import { useEjercicioGimnasio } from '../store/EjercicioGimnasioStore';
-  import { mapState, mapActions } from "pinia";
+  import { mapState, mapActions, mapWritableState } from "pinia";
   export default{
     name: 'EjercicioGimnasioView',
     components: {
@@ -24,90 +37,36 @@
     },
     data() {
       return {
-        texto: "",
-        tareas: [
-          {
-            numeroTarea: 1,
-            tarea: "correr",
-            completado: false
-          },
-          {
-            numeroTarea: 2,
-            tarea: "Nadar",
-            completado: false
-          },
-          {
-            numeroTarea: 3,
-            tarea: "Saltar",
-            completado: true
-          }
-        ],
-        numero: 0,
-        contadorPendientes: 0
+        porHacer: false,
+        completados: false
       }
     },
     methods:{
       insertar() {
-        console.log(this.texto);
-        this.numero = this.tareas.length;
-
-        let objetoTarea = {
-          numeroTarea: this.numero+1,
-          tarea: this.texto,
-          completado: false
-        }
-
-        this.tareas.push(objetoTarea);
-        this.texto = "";
+        this.insertarStore();
       },
 
       marcar(tarea) {
-        // si lo encuentra su valor es la posicion en el array pero si no lo encuentra devuelve -1
-        const i = this.tareas.findIndex(element => element.tarea === tarea.tarea);
-
-        // si lo encuentra
-        if (i > -1) {
-          this.tareas[i].completado = !this.tareas[i].completado;
-
-          if (this.tareas[i].completado == true) {
-            this.contadorPendientes++;
-          }
-          if (this.tareas[i].completado == false) {
-            this.contadorPendientes--;
-          }
-        }
+        this.marcarStore(tarea);
       },
 
       borrar(tarea) {
-        // si lo encuentra su valor es la posicion en el array pero si no lo encuentra devuelve -1
-        const i = this.tareas.findIndex(element => element.tarea === tarea.tarea);
-
-        // si lo encuentra
-        if (i > -1) {
-          if (this.tareas[i].completado == true) {
-            this.contadorPendientes--;
-          }
-
-          this.tareas.splice(i, 1);
-        }
+        this.borrarStore(tarea);
       },
 
-      marcarCompletadoInicio() {
-        for (let i = 0; i < this.tareas.length; i++) {
-          if (this.tareas[i].completado == true) {
-            this.contadorPendientes++;
-          }
-        }
-      }
+      inicioStore() {
+        this.contadorInicialStore();
+      },
 
-      //...mapActions(useEjercicioGimnasio,[''])
+      ...mapActions(useEjercicioGimnasio,['contadorInicialStore','marcarStore','borrarStore','insertarStore'])
     },
     computed: {
     
-      //...mapState(useEjercicioGimnasio,[''])
+      ...mapState(useEjercicioGimnasio,['tareasStore','contadorCompletados','contadorPendientes']),
+      ...mapWritableState(useEjercicioGimnasio,['numeroTarea','texto'])
     },
     created() {
-      this.marcarCompletadoInicio();
+      this.inicioStore();
     }
   }
 </script>

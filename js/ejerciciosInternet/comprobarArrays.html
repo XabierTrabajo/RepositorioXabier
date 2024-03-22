@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso JS - 1</title>
+</head>
+<body>
+    <form onsubmit="comprobar">
+        <input type="text" name="txt" id="txt">
+        <button type="submit" id="btn">Comprobar</button>
+    </form>
+    <br><br><br>
+    <span id="resultado"></span>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+     // cargo el evento al abrir la pagina
+     window.addEventListener("load", eventos);
+    
+    // añado el evento al link
+    function eventos(event) {
+        event.preventDefault();
+        document.getElementById("btn").addEventListener("click", comprobar);
+    }
+
+    function comprobar() {
+        event.preventDefault();
+        let txt = document.getElementById("txt").value;
+        let array = Array(txt.split(" ")); 
+
+        if (array.length == 0) {
+            document.getElementById("resultado").innerHTML = "El campo de texto esta vacio!";
+            document.getElementById("txt").value = "";
+        }
+
+        if (!Array.isArray(array)) {
+            document.getElementById("resultado").innerHTML = "El campo de texto debe ser un array!";
+            document.getElementById("txt").value = "";
+        }
+
+        else {
+            document.getElementById("resultado").innerHTML = "" + array;
+            document.getElementById("txt").value = "";
+        }
+    }
+</script>

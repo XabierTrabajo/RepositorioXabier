@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diferentes zonas horarias</title>
+</head>
+
+<body>
+    <h1>Ver hora actual en diferentes zonas horarias:</h1>
+    <form onsubmit="calcularHora">
+        <select name="zona" id="zona">
+            <option value="0">New York</option>
+            <option value="1">Atenas</option>
+            <option value="2">Londres</option>
+            <option value="3">Bilbao</option>
+            <option value="4">Sidney</option>
+        </select>
+        <button id="enviar">Calcular Hora</button>
+    </form>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        event.preventDefault();
+        document.getElementById("enviar").addEventListener("click", calcularHora);
+    }
+
+    function calcularHora() {
+        event.preventDefault();
+        document.getElementById("respuesta").innerHTML = "";
+
+        // se debe usar el formato de UTC o sino se genera la hora en la zona horaria de españa
+        const fecha = new Date();
+        let hora    = fecha.getUTCHours(); 
+        let minuto  = fecha.getUTCMinutes(); 
+
+        let zona = document.getElementById("zona").value;
+
+        const ciudades = [
+            {
+                ciudad: "New York",
+                desvio: -4
+            },
+            {
+                ciudad: "Atenas",
+                desvio: 3
+            },
+            {
+                ciudad: "Londres",
+                desvio: 0
+            },
+            {
+                ciudad: "Bilbao",
+                desvio: 1
+            },
+            {
+                ciudad: "Sidney",
+                desvio: 10
+            },
+        ];
+
+        let diferenciaHora = ciudades[zona].desvio;
+        hora = hora + diferenciaHora;
+        if (hora > 23) {
+            hora = hora - 23;
+        }
+        if (hora < 10) {
+            hora = "0"+hora;
+        }
+        if (minuto < 10) {
+            minuto = "0"+minuto;
+        }
+
+        document.getElementById("respuesta").innerHTML = `Hora actual en ${ciudades[zona].ciudad} > ${hora} : ${minuto}`;
+    }
+</script>

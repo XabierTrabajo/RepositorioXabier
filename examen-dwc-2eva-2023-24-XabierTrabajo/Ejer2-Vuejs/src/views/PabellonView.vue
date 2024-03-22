@@ -73,7 +73,7 @@
     computed: {
       filtroPabellones() {
         return this.servicios.filter((servicio) => servicio.ENTRADA.includes(this.pabellonSelect));
-      },
+      }
     },
     created() {
       this.cargarServicios();

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juguetes repetidos</title>
+</head>
+<body>
+    <h1>Identificar numeros repetidos de juguetes</h1>
+    <span id="juguetes"></span><br>
+    <span id="numerosRepetidos"></span><br>
+    <span id="nuevosJuguetes"></span><br>
+</body>
+</html>
+<script>
+    // const giftIds = [2, 1, 3, 5, 3, 2];
+    const giftIds = [2, 1, 3, 5, 3, 2, 4, 4, 4, 8, 5, 1, 9];
+    var nuevosIds = [];
+    var numerosRepetidos = [];
+
+    for (let i = 0; i < giftIds.length; i++) {
+        if (nuevosIds.includes(giftIds[i])) {
+            nuevosIds.push(giftIds.length+nuevosIds.length);
+            numerosRepetidos.push(giftIds[i]);
+        }
+        else {
+            nuevosIds.push(giftIds[i]);
+        }
+        
+    }
+
+    document.getElementById("juguetes").innerHTML = "IDs de los juguetes actuales: " + giftIds;
+    document.getElementById("numerosRepetidos").innerHTML = "IDs repetidas: " + numerosRepetidos;
+    document.getElementById("nuevosJuguetes").innerHTML = "IDs de los juguetes arregladas: " + nuevosIds;
+</script>

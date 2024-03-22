@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio Edicios, plantas y puertas con clases</h1>
+    <script>
+        // Definición del objeto Edificio
+        class Edificio{
+            constructor(calle, numero, codigoPostal){
+                this._calle = calle;
+                this._numero = numero;
+                this._codigoPostal = codigoPostal;
+                this._plantas = [];
+            }
+        
+            // Método para agregar plantas y puertas al edificio
+            agregarPlantasYPuertas (numPlantas, puertas) {
+                for (let i = 0; i < numPlantas; i++) {
+                let planta = [];
+                for (let j = 0; j < puertas; j++) {
+                    planta.push({ propietario: null });
+                }
+                this._plantas.push(planta);
+                }
+            }
+            // Método para modificar el número del edificio
+            set numero (numero) {
+                this._numero = numero;
+            };
+            // Método para modificar la calle del edificio
+            set calle (calle) {
+                this._calle = calle;
+            };
+            // Método para modificar el código postal del edificio
+            set codigoPostal (codigo) {
+                this._codigoPostal = codigo;
+            };
+
+            // Método para obtener la calle del edificio
+            get calle () {
+                return this._calle;
+            };
+
+            // Método para obtener el número del edificio
+            get numero () {
+                return this._numero;
+            };
+
+            // Método para obtener el código postal del edificio
+            get codigoPostal () {
+                return this._codigoPostal;
+            };
+
+            // Método para agregar propietario a una puerta en una planta
+            agregarPropietario  (nombre, planta, puerta) {
+                if (this._plantas[planta - 1] && this._plantas[planta - 1][puerta - 1]) {
+                    this._plantas[planta - 1][puerta - 1].propietario = nombre;
+                    console.log(`${nombre} es ahora el propietario de la puerta ${puerta} de la planta ${planta}.`);
+                } else {
+                    console.log('Error: La planta o puerta especificada no existe.');
+                }
+            };
+
+            // Método para imprimir propietarios de cada puerta en el edificio
+            imprimePlantas  () {
+                for (let i = 0; i < this._plantas.length; i++) {
+                for (let j = 0; j < this._plantas[i].length; j++) {
+                    const propietario = this._plantas[i][j].propietario || 'Vacío';
+                    console.log(`Planta ${i + 1}, Puerta ${j + 1}: ${propietario}`);
+                }
+                }
+            };
+
+            //Metodo toString objeto nuevo
+            toString(){
+                return `Construido nuevo edificio en calle: ${this.calle}, nº: ${this.numero}, CP: ${this.codigoPostal}.`
+            }
+        }
+
+
+
+        // Ejemplo de uso
+        const edificio1 = new Edificio('Calle A', 123, '12345');
+        console.log(edificio1.toString());
+        edificio1.agregarPlantasYPuertas(3, 2);
+        edificio1.agregarPropietario('Juan', 1, 1);
+        edificio1.agregarPropietario('Ana', 2, 2);
+        edificio1.imprimePlantas();
+
+        const edificio2 = new Edificio('Calle B', 456, '67890');
+        console.log(edificio2.toString());
+        edificio2.numero = 789;
+        edificio2.calle = 'Calle C';
+        edificio2.codigoPostal = 12345;
+        edificio2.agregarPlantasYPuertas(2, 3);
+        edificio2.agregarPropietario('Pedro', 1, 2);
+        edificio2.agregarPropietario('Elena', 2, 1);
+        edificio2.imprimePlantas();
+
+    </script>
+</body>
+</html>

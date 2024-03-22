@@ -35,6 +35,11 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/ejercicioTraductor">Ejercicio Traductor</RouterLink>
         <RouterLink to="/ejercicioConstructoresJugadores">Ejercicio Constructores Jugadores</RouterLink>
         <RouterLink to="/ejercicioGimnasio">Ejercicio Gimnasio</RouterLink>
+        <RouterLink to="/ejercicioConstructoresEdificio">Ejercicio Constructores Edificio</RouterLink>
+        <RouterLink to="/ejercicioScrabble">Ejercicio Scrabble</RouterLink>
+        <RouterLink to="/ejercicioPizzeria">Ejercicio Pizzeria</RouterLink>
+        <RouterLink to="/ejercicioPlaylist">Ejercicio Playlist</RouterLink>
+        <RouterLink to="/ejercicioCalculadora">Ejercicio Calculadora</RouterLink>
         
       </nav>
     </div>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado Atbash</title>
+</head>
+
+<body>
+    <h1>
+        Escribe un texto y se pondrá al revés.
+    </h1>
+    <form style="width: 100%;">
+        <span>Texto: </span><input type="text" name="texto" id="texto" style="width: 25%;">
+        <button id="cifrar">Cifrar / Descifrar</button>
+        <br><br><br>
+        <span>Texto (des)cifrado: <span id="mensaje"></span></span>
+    </form>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    var mensaje = "";
+
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+    var contadorIntentos = 0;
+    // añado el evento al link
+    function eventos(event) {
+        event.preventDefault();
+        document.getElementById("cifrar").addEventListener("click", cifrado);
+    }
+
+    function cifrado() {
+        event.preventDefault();
+        mensaje = "";
+        let texto = document.getElementById("texto").value;
+        let textoSeparado = texto.toUpperCase().split("").reverse();
+        
+        mensaje = textoSeparado.join("");
+
+        console.log("msg: " + mensaje);
+        document.getElementById("mensaje").innerHTML = mensaje;
+    }
+</script>

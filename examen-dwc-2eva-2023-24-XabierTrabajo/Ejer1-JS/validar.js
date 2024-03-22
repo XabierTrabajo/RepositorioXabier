@@ -16,9 +16,12 @@ function validar() {
     let mostrar  = document.getElementById("mostrar");
     let visible = false;
     let arrayError = 0;
+    let valido = 0;
+
     // servicio
     if (!(/w[a-zA-Z0-9-]/.test(servicio))) {
         console.log("servicio correcto");
+        valido++;
     }
     else {
         console.log("servicio incorrecto");
@@ -38,6 +41,7 @@ function validar() {
         if (pabellon == pabellones[i]) {
             console.log("pabellon correcto");
             i = pabellones.length;
+            valido++;
         }
         else {
             console.log("pabellon incorrecto: reintentando...");
@@ -48,12 +52,15 @@ function validar() {
         alert("Escribe un pabellon valido");
     }
 
-    // crea el servicio y lo mete en el array
-    let servicioObjeto = new Servicio(servicio, pabellon, visible);
-    servicios.push(servicioObjeto);
-    // muestra el objeto creado
-    //servicioObjeto.mostrarInfo();
-    console.log(servicioObjeto.mostrarInfo());
+    if (valido == 2) {
+        // crea el servicio y lo mete en el array
+        let servicioObjeto = new Servicio(servicio, pabellon, visible);
+        servicios.push(servicioObjeto);
+        // muestra el objeto creado
+        //servicioObjeto.mostrarInfo();
+        console.log(servicioObjeto.mostrarInfo());
+    }
+    
     
 }
 

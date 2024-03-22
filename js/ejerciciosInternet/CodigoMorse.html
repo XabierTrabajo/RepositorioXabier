@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código Morse</title>
+</head>
+
+<body>
+    <h1>
+        Escribe un texto para traducirlo a morse.
+    </h1>
+    <form style="width: 100%;">
+        <span>Texto: </span><input type="text" name="texto" id="texto" style="width: 25%;"><br>
+        <br><br>
+        <button id="cifrar">Texto > Morse</button><button id="descifrar">Morse > Texto</button>
+        <br><br><br>
+        <span>Texto (des)cifrado: <span id="mensaje"></span></span>
+    </form>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    
+
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+    var contadorIntentos = 0;
+    // añado el evento al link
+    function eventos(event) {
+        event.preventDefault();
+        document.getElementById("cifrar").addEventListener("click", cifrado);
+        document.getElementById("descifrar").addEventListener("click", descifrado);
+    }
+
+    var mensaje = "";
+    const morse = [
+            {
+                letra: "A",
+                morse: ".-"
+            },
+            {
+                letra: "B",
+                morse: "-..."
+            },
+            {
+                letra: "C",
+                morse: "-.-."
+            },
+            {
+                letra: "D",
+                morse: "-.."
+            },
+            {
+                letra: "E",
+                morse: "."
+            },
+            {
+                letra: "F",
+                morse: "..-."
+            },
+            {
+                letra: "G",
+                morse: "--."
+            },
+            {
+                letra: "H",
+                morse: "...."
+            },
+            {
+                letra: "I",
+                morse: ".."
+            },
+            {
+                letra: "J",
+                morse: ".---"
+            },
+            {
+                letra: "K",
+                morse: "-.-"
+            },
+            {
+                letra: "L",
+                morse: ".-.."
+            },
+            {
+                letra: "M",
+                morse: "--"
+            },
+            {
+                letra: "N",
+                morse: "-."
+            },
+            {
+                letra: "O",
+                morse: "---"
+            },
+            {
+                letra: "P",
+                morse: ".--."
+            },
+            {
+                letra: "Q",
+                morse: "--.-"
+            },
+            {
+                letra: "R",
+                morse: ".-."
+            },
+            {
+                letra: "S",
+                morse: "..."
+            },
+            {
+                letra: "T",
+                morse: "-"
+            },
+            {
+                letra: "U",
+                morse: "..-"
+            },
+            {
+                letra: "V",
+                morse: "...-"
+            },
+            {
+                letra: "W",
+                morse: ".--"
+            },
+            {
+                letra: "X",
+                morse: "-..-"
+            },
+            {
+                letra: "Y",
+                morse: "-.--"
+            },
+            {
+                letra: "Z",
+                morse: "--.."
+            },
+            {
+                letra: "1",
+                morse: ".----"
+            },
+            {
+                letra: "2",
+                morse: "..---"
+            },
+            {
+                letra: "3",
+                morse: "...--"
+            },
+            {
+                letra: "4",
+                morse: "....-"
+            },
+            {
+                letra: "5",
+                morse: "....."
+            },
+            {
+                letra: "6",
+                morse: "-...."
+            },
+            {
+                letra: "7",
+                morse: "--..."
+            },
+            {
+                letra: "8",
+                morse: "---.."
+            },
+            {
+                letra: "9",
+                morse: "----."
+            },
+            {
+                letra: "0",
+                morse: "-----"
+            }
+        ];
+
+    function cifrado() {
+        event.preventDefault();
+        mensaje = "";
+        let texto = document.getElementById("texto").value;
+        let textoSeparado = texto.toUpperCase().split("");
+        let palabraSeparada = texto.toUpperCase().split(" ");
+
+        console.log("txt: " + textoSeparado);
+        
+        // recorro el texto y los caracteres
+        for (let i = 0; i < textoSeparado.length; i++) {
+            let contador = 0;
+            for (let e = 0; e < morse.length; e++) {
+                if (textoSeparado[i].includes(morse[e].letra)) {
+                    mensaje = mensaje + morse[e].morse + " ";
+                    contador++;
+                }
+                if (contador == palabraSeparada.length) {
+                    mensaje = mensaje + " / ";
+                }
+            }
+        } 
+
+        console.log("msg: " + mensaje);
+        document.getElementById("mensaje").innerHTML = mensaje;
+    }
+
+    function descifrado() {
+        event.preventDefault();
+        mensaje = "";
+        let texto = document.getElementById("texto").value;
+        let textoMorse = texto.split(" ");
+        console.log("txt: " + texto);
+        
+        // recorro el texto y los caracteres
+        for (let i = 0; i < textoMorse.length; i++) {
+            for (let e = 0; e < morse.length; e++) {
+                if (textoMorse[i] == morse[e].morse) {
+                    console.log("txt en "+i+": "+texto[i]);
+                    console.log("morse en "+e+": "+morse[e].letra+" "+morse[e].morse);
+                    mensaje = mensaje + morse[e].letra;
+                }
+            }
+        }
+
+        console.log("msg: " + mensaje);
+        document.getElementById("mensaje").innerHTML = mensaje;
+    }
+</script>

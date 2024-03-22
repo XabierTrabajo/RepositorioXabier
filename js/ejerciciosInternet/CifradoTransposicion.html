@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado Transposición </title>
+</head>
+
+<body>
+    <h1>
+        Escribe un texto y asigna una clave para encriptarlo. <br>
+        Para desencriptar la clave debe ser la misma palabra.
+    </h1>
+    <form style="width: 100%;">
+        <span>Texto: </span><input type="text" name="texto" id="texto" style="width: 25%;"><br>
+        <span>Clave: </span><input type="text" name="clave" id="clave" style="width: 25%;"><br>
+        <br><br>
+        <button id="cifrar">Cifrar / Descifrar</button>
+        <br><br><br>
+        <span>Texto (des)cifrado: <span id="mensaje"></span></span>
+    </form>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    var mensaje = "";
+    var columnas = [];
+
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+    var contadorIntentos = 0;
+    // añado el evento al link
+    function eventos(event) {
+        event.preventDefault();
+        document.getElementById("cifrar").addEventListener("click", cifradoTransposicion);
+    }
+
+    function cifradoTransposicion(texto, clave) {
+        event.preventDefault();
+        texto = document.getElementById("texto").value;
+        clave = document.getElementById("clave").value;
+
+        // Eliminar espacios en blanco del texto
+        texto = texto.replace(/\s/g, '');
+
+        // Calcular el número de columnas en función de la longitud de la clave
+        var numColumnas = Math.ceil(texto.length / clave.length);
+
+        // Rellenar el texto con espacios en blanco para que tenga un número de caracteres múltiplo de la clave
+        texto = texto.padEnd(numColumnas * clave.length, ' ');
+
+        // Crear una matriz vacía para almacenar el texto cifrado
+        var matriz = [];
+        for (var i = 0; i < clave.length; i++) {
+            matriz[i] = [];
+        }
+
+        // Rellenar la matriz con el texto cifrado
+        var indice = 0;
+        for (var j = 0; j < numColumnas; j++) {
+            for (var k = 0; k < clave.length; k++) {
+                matriz[k][j] = texto[indice];
+                indice++;
+            }
+        }
+
+        // Ordenar las columnas de la matriz según la clave
+        var claveOrdenada = clave.split('').sort();
+        var textoCifrado = '';
+        for (var l = 0; l < claveOrdenada.length; l++) {
+            var columna = clave.indexOf(claveOrdenada[l]);
+            for (var m = 0; m < numColumnas; m++) {
+                textoCifrado += matriz[columna][m];
+            }
+        }
+
+        document.getElementById("mensaje").innerHTML = textoCifrado;
+
+
+        /*
+            C A T < clave
+            2 1 3 < orden
+            T H E < the sky is blue
+            S K Y
+            I S B
+            L U E > HKSUTSILEYBE
+        */
+    }
+
+</script>

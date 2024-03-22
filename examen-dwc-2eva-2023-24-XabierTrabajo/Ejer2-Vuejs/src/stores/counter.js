@@ -4,8 +4,7 @@ import { defineStore } from 'pinia'
 export const useCounter = defineStore('counter', {
   // state == data
   state: () => ({ 
-    serviciosFavoritos: [],
-    marcado: false
+    serviciosFavoritos: []
   }),
   // actions == methods
   actions: {
@@ -18,14 +17,12 @@ export const useCounter = defineStore('counter', {
       if (i > -1) {
         console.log("Boton pulsado! Ese elemento ya es favorito! Eliminando...");
         this.serviciosFavoritos.splice(i,1);
-        this.marcado = !this.marcado;
       }
       
       // si no esta lo añado
       else {
         console.log("Boton pulsado! Ese elemento ha sido marcado como favorito!");
         this.serviciosFavoritos.push(servicio);
-        this.marcado = !this.marcado;
       }
     }
 

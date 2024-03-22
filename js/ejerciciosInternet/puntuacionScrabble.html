@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculo puntuación Scrabble</title>
+</head>
+
+<body>
+    <span id="palabra"></span><br>
+    <span id="puntos"></span>
+</body>
+
+</html>
+<script>
+
+    var puntos = 0;
+
+    const palabra = prompt("Escribe una palabra para obtener su puntuación en el Scrabble.");
+
+    const Points = {
+        AEIOULNRST: 1,
+        DGV: 2,
+        BCMP: 3,
+        FHVWY: 4,
+        JXQZ: 5,
+        KÑ: 6
+    }
+
+    function puntuacion(letras) {
+        let puntos = 0;
+        for (const l of letras.toUpperCase()) {
+            for (const key in Points) {
+                puntos += key.indexOf(l) !== -1 ? Points[key] : 0
+            }
+        }
+
+        document.getElementById("palabra").innerHTML = "Palabra introducida: " + palabra;
+        document.getElementById("puntos").innerHTML = "Puntuación de la palabra: " + puntos;
+    }
+    
+    puntuacion(palabra);
+</script>

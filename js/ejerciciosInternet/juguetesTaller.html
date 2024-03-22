@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de juguetes</title>
+</head>
+<body>
+    <h1>Para crear una palabra de juguete se necesitan las letras de entre las que hay disponibles</h1>
+    <span id="juguetes"></span><br>
+    <span id="materiales"></span><br>
+
+    <br><br><br>
+    <span id="juguetesConstruibles"></span>
+</body>
+</html>
+<script>
+    const gifts = ['tren', 'oso', 'pelota'];
+    //const materials = 'tronesa';
+    const materials = 'pelotas';
+    let opciones = materials.split("");
+    let construibles = [];
+    let contador = 0;
+
+    for (let i = 0; i < gifts.length; i++) {
+        let palabra = gifts[i].split("");
+        console.log("Palabra separada: "+gifts[i].split(""));
+        console.log("Opciones separadas: "+opciones);
+        contador = 0;
+        
+        // recorre la palabra separada y las opciones separadas
+        for (let e = 0; e < palabra.length; e++) {
+            for (let c = 0; c < opciones.length; c++) {
+                // si encuentra una coincidencia aumenta el contador
+                if (palabra[e].includes(opciones[c])) {
+                    contador++;
+                }
+                // si el contador consigue alcanzar el tamaño de la palabra lo mete en el array
+                if (contador == palabra.length) {
+                    construibles.push(gifts[i]);
+                    console.log("Juguetes posibles: "+construibles);
+                    // salta al siguiente juguete
+                    c = opciones.length;
+                    e = palabra.length;
+                }
+            }
+            
+        }
+    }
+
+
+    document.getElementById("juguetes").innerHTML = "Los juguetes disponibles: " + gifts;
+    document.getElementById("materiales").innerHTML = "Los materiales disponibles: " + materials;
+    document.getElementById("juguetesConstruibles").innerHTML = "Los juguetes que se pueden crear: " + construibles;
+</script>

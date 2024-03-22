@@ -22,7 +22,7 @@
 // import { mapState } from "pinia";
 // Conversion del mismo ejercicio hecho con js puro
 export default {
-  name: 'plantillaView',
+  name: 'EjercicioConstructoresJugadoresJSView',
   components: {
 
   },

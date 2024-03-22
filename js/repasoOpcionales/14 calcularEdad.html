@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular edades</title>
+</head>
+<body>
+    <h1>Calcular edad</h1>
+    <form onsubmit="calcularEdad">
+        <input type="date" name="date" id="date">
+        <button id="enviar">Calcular Edad</button>
+    </form>
+    <span id="respuesta"></span>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load",eventos);
+
+    // añado el evento al link
+    function eventos(){
+        event.preventDefault();
+        document.getElementById("enviar").addEventListener("click", calcularEdad);
+    }
+
+    function calcularEdad() {
+        event.preventDefault();
+
+        const minute = 1000 * 60;
+        const hour = minute * 60;
+        const day = hour * 24;
+        const year = day * 365;
+
+        let fechaTXT = document.getElementById("date").value;
+        let fecha = new Date(fechaTXT);
+        let hoy = new Date();
+
+        let edad = hoy.getFullYear() - fecha.getFullYear();
+
+        document.getElementById("respuesta").innerHTML = `Edad actual: ${edad}`;
+    }
+
+</script>

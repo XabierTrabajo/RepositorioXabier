@@ -39,7 +39,8 @@ const router = createRouter({
       path: '/calculadora',
       name: 'calculadora',
       component: CalculadoraView
-    }
+    },
+
   ]
 })
 

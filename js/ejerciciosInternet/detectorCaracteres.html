@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detector de caracteres y palabras</title>
+</head>
+
+<body>
+    <h1>Detector de caracteres y palabras</h1>
+    <p id="texto">
+        Lorem ae.
+    </p>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        detectarCaracteres();
+    }
+
+    function detectarCaracteres() {
+        let texto = document.getElementById("texto").innerText;
+        //let texto = document.getElementById("texto").value; //si es un campo input
+        
+        let numChars = texto.length;
+        let numWords = texto.split(" ").length;
+        console.log("Texto: "+texto);
+        console.log("Nº palabras: "+numWords);
+        console.log("Nº caracteres: "+numChars);
+
+        document.getElementById("respuesta").innerHTML = `En el texto hay ${numWords} palabras y ${numChars} caracteres.`;
+    }
+</script>

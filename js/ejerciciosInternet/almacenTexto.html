@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almacen de texto</title>
+</head>
+<body>
+    <p id="respuesta"></p>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load",eventos);
+
+    // añado el evento al link
+    function eventos(){
+        event.preventDefault();
+        texto();
+    }
+
+    let almacen = ["ae", "Hola mundo!", "Hoy es un dia de sol, alegria digo yo"];
+
+    function texto () {
+        let msg = prompt("Escribe un texto para almacenarlo en el registro");
+
+        if (almacen.includes(msg)) {
+            alert("El texto introducido ya existe!");
+        }
+        else {
+            almacen.push(msg);
+
+        };
+
+        for (let i = 0; i < almacen.length; i++) {
+            document.getElementById("respuesta").innerHTML = document.getElementById("respuesta").innerHTML + almacen[i] + "<br>";
+        }
+        
+    }
+</script>

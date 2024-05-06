@@ -71,6 +71,7 @@ export const useEjerciciosNavidadStore = defineStore('store', {
   },
   // getters == computed
   getters: {
+    // metodo computado, llamar a este metodo directamente como variable de vue
     calcularTotalLikesStore() {
       // reseteo la variable para evitar que se duplique la cantidad cuando cambia el numero de likes
       this.totalLikesAlmacen = 0;
@@ -78,6 +79,7 @@ export const useEjerciciosNavidadStore = defineStore('store', {
         this.totalLikesAlmacen += this.peliculasAlmacenadas[i].likes;
         
       }
+      return this.totalLikesAlmacen;
     }
   },
 })

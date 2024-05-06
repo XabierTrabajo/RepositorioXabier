@@ -40,7 +40,10 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/ejercicioPizzeria">Ejercicio Pizzeria</RouterLink>
         <RouterLink to="/ejercicioPlaylist">Ejercicio Playlist</RouterLink>
         <RouterLink to="/ejercicioCalculadora">Ejercicio Calculadora</RouterLink>
-        
+        <RouterLink to="/ejercicioHighscoresAlumnos">Ejercicio Highscores Alumnos</RouterLink>
+        <RouterLink to="/ejercicioFruteria">Ejercicio Fruteria</RouterLink>
+        <RouterLink to="/ejercicioConversor">Ejercicio Conversor de Longitud, Money, Tiempo</RouterLink>
+        <RouterLink to="/ejercicioBurger">Ejercicio Hamburgueseria</RouterLink>
       </nav>
     </div>
   </header>

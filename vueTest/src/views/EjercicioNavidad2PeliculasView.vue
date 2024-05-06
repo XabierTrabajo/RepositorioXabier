@@ -5,7 +5,7 @@
         <button @click="restarLike(pelicula)" style="background-color: red; color: white;">Dislike</button>  {{ pelicula.likes }}  <button @click="sumarLike(pelicula)" style="background-color: greenyellow;">Like</button>
       </div>
       <br><br>
-      <h2>Total likes: {{ totalLikesAlmacen }}</h2>
+      <h2>Total likes: {{ calcularTotalLikesStore }}</h2>
     </div>
 
 </template>

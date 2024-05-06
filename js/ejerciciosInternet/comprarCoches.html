@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprar coches</title>
+</head>
+<body>
+    <span>¿Qué tipo de vehículo prefieres? </span>
+    <select name="tipo" id="tipo">
+        <option value="Coches">Turismo</option>
+        <option value="Motos">Moto 120cc</option>
+    </select>
+    <button onclick="mostrar()">Seleccionar</button>
+
+    <br><br><br>
+    <select name="lista" id="listaCoches" class="hidden" onchange="selectV(this)">
+        <option value="6900">Ford Fiesta</option>
+        <option value="27690">Mercedes E200</option>
+        <option value="8490">Peugot 307</option>
+        <option value="24990">Ford Mustang</option>
+        <option value="7000">Seat Ibiza</option>
+    </select>
+    <select name="lista" id="listaMotos" class="hidden" onchange="selectV(this)">
+        <option value="2250">Scooter</option>
+        <option value="2800">Deportiva</option>
+        <option value="3000">Rally</option>
+    </select>
+
+    
+    <span>Vehículo 1: <span id="vNombre"></span> | Valor: <span id="vPrecio"></span>€</span><br>
+    <span>Vehículo 2: <span id="vNombre2"></span> | Valor: <span id="vPrecio2"></span>€</span><br><br>
+    <span id="respuesta"></span>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+    .hidden {
+        display: none;
+    }
+    .show {
+        display: block;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load",eventos);
+
+    // añado el evento al link
+    function eventos(){
+        event.preventDefault();
+        //document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+    let seleccionCategoria = "";
+    // muestra el listado seleccionado 
+    function mostrar() {
+        let seleccion = document.getElementById("tipo").value;
+        let lista = "lista"+seleccion;
+        seleccionCategoria = lista;
+
+        // oculta todo y luego muestra lo seleccionado
+        document.getElementById("listaCoches").className = "hidden";
+        document.getElementById("listaMotos").className = "hidden";
+        document.getElementById(lista).className = "show";
+    }
+
+    let contador = 0;
+    function selectV(vehiculoSeleccionado) {
+        let vNombre = vehiculoSeleccionado.options[vehiculoSeleccionado.selectedIndex].text;
+        let vPrecio = document.getElementById(seleccionCategoria).value;
+        console.log("contador: "+contador);
+
+        // selecciona el 1ero
+        if (contador == 0) {
+            console.log(vNombre,vPrecio);
+            document.getElementById("vNombre").innerHTML = vNombre;
+            document.getElementById("vPrecio").innerHTML = vPrecio;
+            
+        }
+        // selecciona el segundo
+        if (contador == 1) {
+            console.log(vNombre,vPrecio);
+            document.getElementById("vNombre2").innerHTML = vNombre;
+            document.getElementById("vPrecio2").innerHTML = vPrecio;
+             
+        }
+        contador++;
+        console.log("contador al acabar: "+contador);
+
+        // compara el precio
+        if (contador == 2) {
+            let vN1 = document.getElementById("vNombre").innerHTML;
+            let vP1 = document.getElementById("vPrecio").innerHTML;
+            let vN2 = document.getElementById("vNombre2").innerHTML;
+            let vP2 = document.getElementById("vPrecio2").innerHTML;
+
+            if (vP1 > vP2) {
+                document.getElementById("respuesta").innerHTML = `El vehiculo ${vN2} (${vP2}€) es más caro que el vehículo ${vN1} (${vP1}€).`;
+            }
+
+            if (vP2 > vP1) {
+                document.getElementById("respuesta").innerHTML = `El vehiculo ${vN2} (${vP2}€) es más caro que el vehículo ${vN1} (${vP1}€).`;
+            }
+
+            else {
+                document.getElementById("respuesta").innerHTML = "Los 2 vehículos valen lo mismo";
+            }
+            
+        }
+    }
+    
+</script>

@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       playlist: [
-        'ae',
         'All Mine - Portishead',
         'Sight to Behold - Devendra Banhart',
         'Sour Times - Portishead',
@@ -39,6 +38,7 @@ export default {
         'Court and Spark - Joni Mitchell',
         'Sour Times - Portishead',
         'The Treasure - Fra Lippo Lippi',
+        'ae'
       ],
       oculto: true,
       txtCancion: "",
@@ -49,6 +49,7 @@ export default {
     insertar(cancion) {
       let contador = 0;
       for (let i = 0; i < this.playlist.length; i++) {
+        // si encuentra la cancion
         if (this.playlist[i].toUpperCase() == cancion.toUpperCase()) {
           console.log(this.playlist[i].toUpperCase());
           this.oculto = false;
@@ -60,10 +61,21 @@ export default {
           contador++;
         }
       }
-
+      // si aun no existe en la playlist la inserta
       if (contador == this.playlist.length) {
+        // pone la primera letra en matusculas para filtrar mejor luego
+        let cancionMayuscula = "";
+        for (let i = 0; i < cancion.length; i++) {
+          if (i == 0) {
+            cancionMayuscula = cancion[0].toUpperCase();
+          }
+          else {
+            cancionMayuscula = cancionMayuscula + cancion[i];
+          }
+        }
+        // inserta la cancion
+        this.playlist.push(cancionMayuscula);
         this.txtCancion = "";
-        this.playlist.push(cancion);
         this.oculto = true;
         console.log("Boton pulsado! Insertando...");
       }
@@ -98,18 +110,42 @@ export default {
       // si ya esta lo elimino
       if (i > -1) {
         console.log("Boton pulsado! Eliminando...");
-        this.playlist.splice(i,1);
+        this.playlist.splice(i, 1);
       }
-      
+
       // si no esta
       else {
         console.log("Boton pulsado! Ha ocurrido un error y no se pudo encontrar la cancion!");
       }
     },
 
+    // ordena la playlist alfabeticamente
     ordenarPlaylist() {
       console.log("Boton pulsado! Ordenando...");
       this.playlist.sort();
+    },
+
+    mayusculaInicial() {
+      // pone la primera letra en matusculas para filtrar mejor luego
+      let cancionMayuscula = "";
+      let cancionesFormateadas = [];
+      for (let i = 0; i < this.playlist.length; i++) {
+        for (let e = 0; e < this.playlist[i].length; e++) {
+          if (e == 0) {
+            cancionMayuscula = this.playlist[i][0].toUpperCase();
+          }
+          else {
+            cancionMayuscula = cancionMayuscula + this.playlist[i][e];
+          }
+          
+        }
+        // inserta la cancion cuando recorre el titulo
+        cancionesFormateadas.push(cancionMayuscula);
+        cancionMayuscula = "";
+      }
+      this.playlist = cancionesFormateadas;
+      console.log("Formateando playlist...");
+
     }
   },
   computed: {
@@ -117,7 +153,7 @@ export default {
 
   },
   created() {
-
+    this.mayusculaInicial();
   }
 }
 </script>

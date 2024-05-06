@@ -5,35 +5,10 @@
       <h1>Creación de ruta turística</h1><br>
       <h2>Filtros</h2><br>
 
-      <span>Selecciona provincia: </span>
-      <select v-model="regionSelect">
-        <option value="">Todas</option>
-        <option value="Bizkaia">Bizkaia</option>
-        <option value="Gipuzkoa">Gipuzkoa</option>
-        <option value="Araba">Araba</option>
-      </select>
-      <br>
-      <span>Selecciona mes: </span>
-      <select v-model="mesSelect">
-        <option value="">Todos</option>
-        <option value="01">Enero</option>
-        <option value="02">Febrero</option>
-        <option value="03">Marzo</option>
-        <option value="04">Abril</option>
-        <option value="05">Mayo</option>
-        <option value="06">Junio</option>
-        <option value="07">Julio</option>
-        <option value="08">Agosto</option>
-        <option value="09">Septiembre</option>
-        <option value="10">Octubre</option>
-        <option value="11">Noviembre</option>
-        <option value="12">Diciembre</option>
-      </select>
-      <br>
       <span>Del: </span>
-      <input type="number" min="1" max="31" v-model="diaL">
+      <input type="date" v-model="diaL">
       <span> Al: </span>
-      <input type="number" min="1" max="31" v-model="diaR">
+      <input type="date" v-model="diaR">
     </div>
     <table>
       <tr>
@@ -72,17 +47,15 @@
   import { mapState, mapActions } from "pinia";
   import BasqueTour from '../components/BasqueTour.vue'
   export default{
-    name: 'TurismoView',
+    name: 'TurismoViewFiltroModificado',
     components: {
       BasqueTour
     },
     data() {
       return {
         eventos: [],
-        regionSelect: "",
-        mesSelect: "",
-        diaL: 1,
-        diaR: 31
+        diaL: "",
+        diaR: ""
       }
     },
     methods:{
@@ -125,12 +98,11 @@
 
         });
 
-        // filtro por region y mes seleccionados
+        // filtro por fecha seleccionada
+        // no funciona, comprobar errores
         return this.eventos.filter(
         (e => {
-          return e.territory.includes(this.regionSelect) &&
-          e.eventStartDate.split("/")[1].includes(this.mesSelect) &&
-          (e.eventStartDate.split("/")[0] >= this.diaL && e.eventStartDate.split("/")[0] <= this.diaR)
+          return (e.eventStartDate.reverse().replace("/", "-") >= this.diaL && e.eventStartDate.reverse().replace("/", "-") <= this.diaR)
         }));
       },
 

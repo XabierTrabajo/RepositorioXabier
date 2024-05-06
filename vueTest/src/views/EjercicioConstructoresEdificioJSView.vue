@@ -2,7 +2,7 @@
   <div>
     <span>Buscar edificios en calle: </span>
     <input type="text" v-model="texto"><br>
-    <span>Edificios encontrados: </span>
+    <span>Edificios encontrados en la calle solicitada: </span>
     <select v-model="edificioSeleccionado">
       <option v-for="edificio in callesFiltradas" v-bind:value="edificio.numero">
         {{ edificio.calle }} - Nº{{ edificio.numero }}
@@ -33,7 +33,7 @@ export default {
       texto: "",
       edificioSeleccionado: 0,
       numEdificios: 1,
-      numCalles: 4
+      numCalles: 1
     }
   },
   methods: {

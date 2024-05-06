@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highscores</title>
+</head>
+<body>
+    <h1>Mejores puntuaciones</h1>
+    <span id="respuesta"></span>
+    <br><br><br>
+    <h2>Tu puntos</h2>
+    <span id="jugador"></span>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load",eventos);
+
+    // añado el evento al link
+    function eventos(){
+        event.preventDefault();
+
+        jugador();
+        highscores();
+    }
+
+    // variables
+    class Highscore {
+        constructor(nombre, puntos) {
+            this._nombre = nombre;
+            this._puntos = puntos;
+        }
+
+        // Getters
+        get nombre() {
+            return this._nombre;
+        }
+        get puntos() {
+            return this._puntos;
+        }
+
+        // Setters
+        set nombre(nombre) {
+            this._nombre = nombre;
+        }
+        set puntos(puntos) {
+            this._puntos = puntos;
+        }
+
+        mejorPuntuacion() {
+            return this
+        }
+    }
+
+    let jugadores = [
+        {
+            nombre: "jugador 1",
+            puntos: 15000
+        },
+        {
+            nombre: "jugador 2",
+            puntos: 12000
+        },
+        {
+            nombre: "jugador 3",
+            puntos: 9000
+        },
+        {
+            nombre: "jugador 4",
+            puntos: 6000
+        }
+    ]
+
+    function highscores() {
+        // puntos del usuario
+        document.getElementById("jugador").innerHTML = jugadores[jugadores.length-1].nombre + " " + jugadores[jugadores.length-1].puntos;
+
+        // filtra de mayor a menor
+        jugadores.sort((a, b) => b.puntos - a.puntos);
+
+        // filtra las 3 mejores puntuaciones
+        for (let i = 0; i < 3; i++) {
+            document.getElementById("respuesta").innerHTML = document.getElementById("respuesta").innerHTML + (i+1) +": "+ jugadores[i].nombre + " " + jugadores[i].puntos + "<br>";
+        }
+    }
+
+    function jugador() {
+        let nombreTXT = prompt("Escribe tu nombre de jugador");
+        let puntosTXT = Number(prompt("Escribe tus puntos"));
+
+        // puntuacion invalida
+        if (isNaN(puntosTXT)) {
+            puntosTXT = Math.floor(Math.random() * 100) * 1000;
+            console.log("Puntuacion invalida! Asignando la siguiente puntos > " + puntosTXT);
+        }
+
+        // genera la puntuacion y lo inserta
+        let jugadorObjeto = new Highscore(nombreTXT, puntosTXT);
+        jugadores.push(jugadorObjeto);
+        console.log(jugadores);
+    }
+</script>

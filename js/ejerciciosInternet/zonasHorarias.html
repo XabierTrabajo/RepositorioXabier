@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zonas horarias</title>
+</head>
+<body>
+    <h1>Ver hora actual en diferentes zonas horarias:</h1>
+    <form onsubmit="calcularHora">
+        <select name="zona" id="zona">
+            <option value="0">Francia</option>
+            <option value="1">México</option>
+            <option value="2">Inglaterra</option>
+            <option value="3">India</option>
+            <option value="4">Japón</option>
+            <option value="5">Ceilán</option>
+        </select>
+        <button id="enviar">Calcular Hora</button>
+    </form>
+    <span id="respuesta"></span>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load",eventos);
+
+    // añado el evento al link
+    function eventos() {
+        event.preventDefault();
+        document.getElementById("enviar").addEventListener("click", calcularHora);
+    }
+
+    function calcularHora() {
+        event.preventDefault();
+        document.getElementById("respuesta").innerHTML = "";
+
+        // se debe usar el formato de UTC o sino se genera la hora en la zona horaria de españa
+        const fecha = new Date();
+        let hora    = fecha.getUTCHours(); 
+        let minuto  = fecha.getUTCMinutes(); 
+
+        let zona = document.getElementById("zona").value;
+
+        const zonas = [
+            {
+                pais: "Francia",
+                desvio: 2
+            },
+            {
+                pais: "México",
+                desvio: 6
+            },
+            {
+                pais: "Inglaterra",
+                desvio: 1
+            },
+            {
+                pais: "India",
+                desvio: 5.5
+            },
+            {
+                pais: "Japón",
+                desvio: 9
+            },
+            {
+                pais: "Ceilán",
+                desvio: 5.5
+            },
+        ];
+
+        let diferenciaHora = zonas[zona].desvio;
+        hora = hora + Math.trunc(diferenciaHora);
+
+        let minutosDesvio = diferenciaHora % 1;
+        let minutosDesvioConvertidos = 0;
+        console.log(minutosDesvio);
+
+        while (minutosDesvio > 0) {
+            if (minutosDesvio <= 0) {
+                break;
+            }
+
+            minutosDesvio = minutosDesvio.toFixed(2) - 0.01;
+            minutosDesvioConvertidos = minutosDesvioConvertidos + 0.6;
+            
+            console.log("minutosDesvio: "+minutosDesvio);
+            console.log("minutosDesvioConvertidos: "+minutosDesvioConvertidos);
+
+            
+            //break;
+        }
+
+        minuto = minuto + Number.parseInt(minutosDesvioConvertidos);
+
+        if (hora > 23) {
+            hora = hora - 23;
+        }
+        if (hora < 10) {
+            hora = "0"+hora;
+        }
+        if (minuto > 59) {
+            minuto = minuto - 59;
+        }
+        if (minuto < 10) {
+            minuto = "0"+minuto;
+        }
+
+        document.getElementById("respuesta").innerHTML = `Hora actual en ${zonas[zona].pais} > ${hora} : ${minuto}`;
+    }
+</script>

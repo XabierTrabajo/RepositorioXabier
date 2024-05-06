@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Porcentajes</title>
+</head>
+
+<body>
+    <span>Calcular porcentaje</span><br>
+    <input type="number" id="num1">
+    <input type="number" id="num2">
+    <button id="clickPorcentaje">Calcular porcentaje</button>
+    <p id="porcentaje">Retención aplicada: </p>
+
+    <br><br><br>
+    <span>Rebajas</span><br>
+    <input type="number" id="numPorcentaje1">
+    <input type="number" id="numPorcentaje2" min="0" max="100">
+    <button id="clickResultado">Calcular precio</button>
+    <p id="resultado">
+        Valor descontado: <br>
+        Nuevo precio: 
+    </p>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        event.preventDefault();
+        document.getElementById("clickPorcentaje").addEventListener("click", porcentaje);
+        document.getElementById("clickResultado").addEventListener("click", resultado);
+    }
+
+    function porcentaje() {
+        let resultado = 0;
+        let num1 = document.getElementById("num1").value;
+        let num2 = document.getElementById("num2").value;
+
+        resultado = (100 * num2) / num1;
+
+        document.getElementById("porcentaje").innerHTML = `Retención aplicada: ${resultado}%`;
+    }
+
+    function resultado() {
+        let resultado = 0;
+        let descontado = 0;
+        let num1 = document.getElementById("numPorcentaje1").value;
+        let num2 = document.getElementById("numPorcentaje2").value;
+
+        descontado = num1 / num2;
+
+        resultado = num1 - descontado;
+
+        document.getElementById("resultado").innerHTML = `Valor descontado: ${descontado} <br> Nuevo precio: ${resultado}`;
+    }
+</script>

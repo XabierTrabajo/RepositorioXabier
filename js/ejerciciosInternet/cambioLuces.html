@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio color luces</title>
+</head>
+<body>
+    <div>
+        <span id="luces"></span>
+    </div>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load",eventos);
+
+    // añado el evento al link
+    function eventos(){
+        event.preventDefault();
+        //document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+    let luces = [true, false, false, true];
+    let check = luces[0];
+
+    console.log("luces sin ordenar: "+luces);
+
+    for (let i = 0; i < luces.length; i++) {
+        if (luces[i] != check) {
+            luces[i] = check;
+            check = !check;
+        }
+        else {
+            check = !check;
+        }
+    }
+
+    console.log("luces ordenadas: "+luces);
+</script>

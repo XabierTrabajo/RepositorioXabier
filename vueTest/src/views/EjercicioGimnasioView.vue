@@ -1,5 +1,9 @@
 <template>
     <div>
+      
+      <BienvenidoAlGym></BienvenidoAlGym>
+      <br><br><br>
+      
       <form @submit.prevent @submit="insertar">
         <input type="text" v-model="texto">
         <input type="submit" value="Insertar">
@@ -28,12 +32,13 @@
 
 </template>
 <script>
-  import { useEjercicioGimnasio } from '../store/EjercicioGimnasioStore';
+  import BienvenidoAlGym from '../components/BienvenidoAlGym.vue';
+import { useEjercicioGimnasio } from '../store/EjercicioGimnasioStore';
   import { mapState, mapActions, mapWritableState } from "pinia";
   export default{
     name: 'EjercicioGimnasioView',
     components: {
-      
+      BienvenidoAlGym
     },
     data() {
       return {

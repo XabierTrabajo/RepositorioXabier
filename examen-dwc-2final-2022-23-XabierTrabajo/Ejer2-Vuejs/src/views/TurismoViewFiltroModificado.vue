@@ -5,6 +5,14 @@
       <h1>Creación de ruta turística</h1><br>
       <h2>Filtros</h2><br>
 
+      <span>Selecciona provincia: </span>
+      <select v-model="regionSelect">
+        <option value="">Todas</option>
+        <option value="Bizkaia">Bizkaia</option>
+        <option value="Gipuzkoa">Gipuzkoa</option>
+        <option value="Araba">Araba</option>
+      </select>
+      <br>
       <span>Del: </span>
       <input type="date" v-model="diaL">
       <span> Al: </span>
@@ -54,6 +62,7 @@
     data() {
       return {
         eventos: [],
+        regionSelect: "",
         diaL: "",
         diaR: ""
       }
@@ -88,21 +97,33 @@
       eventosFiltrados() {
         // ordenar los eventos por fecha
         this.eventos.sort(function (a, b) {
-          if (a.eventStartDate > b.eventStartDate) {
+          if (a.eventSearchDate1 > b.eventSearchDate1) {
             return 1;
           }
-          if (b.eventStartDate > a.eventStartDate) {
+          if (b.eventSearchDate1 > a.eventSearchDate1) {
             return -1;
           }
           return 0;
 
         });
 
-        // filtro por fecha seleccionada
-        // no funciona, comprobar errores
+        // cambia de date a string
+        let txtL = this.diaL.toString();
+        let txtR = this.diaR.toString();
+
+        // elimino los guiones para que pueda comparar las fechas mejor
+        // /contenido/g reemplaza todo lo que encuentre
+        txtL = txtL.replace(/-/g, "");
+        txtR = txtR.replace(/-/g, "");
+
+        console.log("txtL: " + txtL);
+        console.log("txtR: " + txtR);
+        
+        // filtro por fecha seleccionada y region
         return this.eventos.filter(
         (e => {
-          return (e.eventStartDate.reverse().replace("/", "-") >= this.diaL && e.eventStartDate.reverse().replace("/", "-") <= this.diaR)
+          return e.territory.includes(this.regionSelect) &&
+          (e.eventSearchDate1 >= txtL && e.eventSearchDate1 <= txtR)
         }));
       },
 

@@ -8,9 +8,9 @@
 <body>
     <form>
         <label for="nombre">Nombre: </label><!-- Obtengo el valor intrucido y le digo que lo pase a mayusculas -->
-        <input type="text" name="nombre" id="nombre" onblur="this.value = this.value.toUpperCase();"><span class="obligatorio"> *</span><br>
+        <input type="text" name="nombre" id="nombre" onkeyup="this.value = this.value.toUpperCase();"><span class="obligatorio"> *</span><br>
         <div class="error oculto" id="errorNombre">El nombre es obligatorio</div><br>
-        <label for="apellido">Apellidos: </label>
+        <label for="apellido">Apellidos: </label><!-- On blur lo hace al perder el foco -->
         <input type="text" name="apellido" id="apellido" onblur="this.value = this.value.toUpperCase();"><span class="obligatorio"> *</span><br>
         <div class="error oculto" id="errorApellido">El apellido es obligatorio</div><br>
         <br><br>
@@ -43,10 +43,13 @@
         </select>
         <div class="error oculto">El nombre es obligatorio</div><br>
         <br><br><br>
-        <button id="enviar">Enviar</button>
-        <span class="obligatorio"> *</span><span> Obligatorio</span>
-        <br><br>
-        <div id="intentos" class="oculto"></div>
+        <div id="intentos" class="mostrar">
+            <button id="enviar">Enviar</button>
+            <span class="obligatorio"> *</span><span> Obligatorio</span>
+        
+            <br><br>
+            <span id="intentosTXT"></span>
+        </div>
     </form>
 </body>
 </html>
@@ -55,7 +58,7 @@
 
     // cargo el evento al abrir la pagina
     window.addEventListener("load", eventos);
-    var contadorIntentos = 0;
+    var contadorIntentos = 3;
     // añado el evento al link
     function eventos() {
         event.preventDefault();
@@ -155,12 +158,17 @@
             document.getElementById("errorPass2").classList.add("mostrar");
             document.getElementById("errorPass").classList.remove("oculto");
             document.getElementById("errorPass2").classList.remove("oculto");
+            
+            contadorIntentos--;
         }
-        // mostrar cuantas veces se ha pulsado el boton
-        contadorIntentos++;
-        document.getElementById("intentos").innerHTML = "Numero de intentos: " + contadorIntentos;
-        document.getElementById("intentos").classList.add("mostrar");
-        document.getElementById("intentos").classList.remove("oculto");
+
+        // mostrar intentos restantes
+        document.getElementById("intentosTXT").innerHTML = "Intentos restantes: " + contadorIntentos;
+        if (contadorIntentos == 0) {
+            document.getElementById("intentos").classList.remove("mostrar");
+            document.getElementById("intentos").classList.add("oculto");
+        }
+        
     }
     
 </script>

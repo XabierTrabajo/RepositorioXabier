@@ -115,10 +115,10 @@
       eventosFiltrados() {
         // ordenar los eventos por fecha
         this.eventos.sort(function (a, b) {
-          if (a.eventStartDate > b.eventStartDate) {
+          if (a.eventSearchDate1 > b.eventSearchDate1) {
             return 1;
           }
-          if (b.eventStartDate > a.eventStartDate) {
+          if (b.eventSearchDate1 > a.eventSearchDate1) {
             return -1;
           }
           return 0;

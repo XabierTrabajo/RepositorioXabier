@@ -95,8 +95,8 @@
 </script>
 <style>
   .parent {
-    width: 1366px;
-    height: 768px;
+    width: 1000px;
+    height: 600px;
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -106,6 +106,8 @@
 
     justify-items: stretch;
     align-items: stretch;
+
+    font-weight: bold;
   }
   /* operadores */
   .div1 { grid-area: 1 / 1 / 2 / 5; }

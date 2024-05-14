@@ -10,38 +10,37 @@
         <li style="list-style: none;">{{ categoria }}</li>
       </ul>
     </div>
-    <table>
+    <table style="text-align: left;">
       <tr>
           <th>Categoria</th>
           <th>Icono</th>
           <th>Modelo</th>
           <th>Precio</th>
           <th>Comprar</th>
-          <th>Unidades seleccionadas</th>
+          <th style="padding-left: 1%;">Unidades seleccionadas</th>
       </tr>
       <tr v-for="producto in filtroCategorias">
         <td>{{ producto.category }}</td>
         <!--La ruta relativa ../ no funciona en este caso por algun motivo-->
         <td><img v-bind:src="producto.image" v-bind:alt="producto.image" style="width: 35px; height: 35px;"></td>
-        <td>{{ producto.title }}</td>
-        <td>{{ producto.price }} €</td>
+        <td style="padding-left: 1%;">{{ producto.title }}</td>
+        <td style="width: 8%;">{{ producto.price }} €</td>
         <td>
           <button @click="comprar(producto)">+</button>
           <button @click="vender(producto)">-</button>
         </td>
         <!-- Comprueba si el producto esta comprado, si encuentra el producto muestra sus unidades -->
-        <td><input type="number" disabled v-bind:value="productosComprados.findIndex( e=> e.title == producto.title) != -1 ? productosComprados[productosComprados.findIndex( e=> e.title == producto.title)].units : 0"></td>
+        <td style="padding-left: 1%;"><input type="number" disabled v-bind:value="productosComprados.findIndex( e=> e.title == producto.title) != -1 ? productosComprados[productosComprados.findIndex( e=> e.title == producto.title)].units : 0"></td>
       </tr>
     </table>
 
 
 
     <br><br><br>
-    <button>Imprimir factura</button><br>
     <div>
-      <h2>Total de compra: {{ total }} €</h2>
+      <h2>Total de compra: {{ total.toFixed(2) }} €</h2>
 
-      <table>
+      <table style="text-align: left; width: 75%;">
         <tr>
             <th>Modelo</th>
             <th>Precio</th>
@@ -62,7 +61,7 @@
           <input type="number" v-model="dineroEntregado"> €
         </h2>
         <br><br>
-        <h2 >Cambio: {{ pago }} €</h2>
+        <h2 >Cambio: {{ pago.toFixed(2) }} €</h2>
       </div>
     </div>
 </template>
@@ -106,7 +105,6 @@
           price: producto.price,
           units: 1
         };
-        this.counter++;
         this.guardarArticulo(articulo);
       },
 
@@ -116,7 +114,6 @@
           price: producto.price,
           units: 1
         };
-        this.counter--;
         this.borrarArticulo(articulo);
       },
 
@@ -129,7 +126,6 @@
         if (i > -1) {
           console.log("Ese articulo ya está comprado! Añadiendo una nueva unidad...");
           this.productosComprados[i].units++;
-          this.counter = this.productosComprados[i].units;
 
           alert("El articulo "+ articulo.title +" ya ha sido comprado. Se añadirá una nueva unidad.");
         }
@@ -152,7 +148,7 @@
 
         // si ya esta le sumo una unidad
         if (i > -1) {
-          console.log("Ese articulo ya está comprado! Añadiendo reduciendo unidades...");
+          console.log("Ese articulo ya está comprado! reduciendo unidades...");
           this.productosComprados[i].units--;
 
           alert("El articulo "+ articulo.title +" ya ha sido comprado. Se reducirá una unidad.");
@@ -168,7 +164,7 @@
         else {
           console.log("Ese artículo aún no ha sido comprado! Operación cancelada!");
 
-          alert("El articulo "+ articulo.title +" aún no ha sido comprado. Operación cancelada");
+          alert("El articulo "+ articulo.title +" aún no ha sido comprado. Operación cancelada.");
         }
 
         
@@ -180,7 +176,15 @@
       },
 
       pago() {
-        return this.dineroCambio = this.dineroEntregado - this.total;
+        this.dineroCambio = this.dineroEntregado - this.total;
+
+        // arreglado error visual en el que si el total es 0 y el pago es 0 devuelve -0 en el cambio
+        if (this.dineroCambio == 0) {
+          return this.dineroCambio = 0;
+        }
+        else {
+          return this.dineroCambio
+        }
       },
 
       ...mapState(useCounter,['usuario','login'])

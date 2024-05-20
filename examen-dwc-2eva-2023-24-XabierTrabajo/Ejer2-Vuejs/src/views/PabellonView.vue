@@ -10,7 +10,7 @@
           {{ entrada }}
         </option>
       </select>
-
+<!--
       <br><br><br>
 
       <ul v-for="svc in filtroPabellones" style="list-style: none;">
@@ -19,6 +19,22 @@
           {{ svc.SERVICIO }}
         </li>
       </ul>
+-->
+      <br><br><br>
+
+      <table>
+      <tr>
+        <th>Icono</th>
+        <th>Servicio</th>
+        <th>Pabellón</th>
+      </tr>
+      <tr v-for="svc in filtroPabellones">
+        <!--La ruta relativa ../ no funciona en este caso por algun motivo-->
+        <td v-if="svc.MOSTRAR == 1"><img v-bind:src="'src/assets/iconos/' + svc.ICONO" v-bind:alt="svc.ICONO"style="width: 35px; height: 35px;"></td>
+        <td v-if="svc.MOSTRAR == 1">{{ svc.SERVICIO }}</td>
+        <td v-if="svc.MOSTRAR == 1">{{ svc.ENTRADA }}</td>
+      </tr>
+    </table>
     </div>
 </template>
 <script>
@@ -40,6 +56,7 @@
       }
     },
     methods:{
+      /*
       async cargarServicios() {
         // obtiene mediante axios los datos del juego
         const allData = await axios.get("/basurto.json");
@@ -48,6 +65,7 @@
 
         console.log(this.servicios);
       },
+      */
       async cargarPabellones() {
         // obtiene mediante axios los datos del juego
         const allData = await axios.get("/basurto.json");
@@ -76,7 +94,7 @@
       }
     },
     created() {
-      this.cargarServicios();
+      //this.cargarServicios();
       this.cargarPabellones();
     }
   }

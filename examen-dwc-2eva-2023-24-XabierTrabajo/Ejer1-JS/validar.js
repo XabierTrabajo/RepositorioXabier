@@ -56,9 +56,13 @@ function validar() {
         // crea el servicio y lo mete en el array
         let servicioObjeto = new Servicio(servicio, pabellon, visible);
         servicios.push(servicioObjeto);
-        // muestra el objeto creado
-        //servicioObjeto.mostrarInfo();
-        console.log(servicioObjeto.mostrarInfo());
+
+        // muestra el objeto creado y dependiendo de visible aparece o no por pantalla
+        servicioObjeto.mostrarInfo();
+
+        //console.log(servicioObjeto.mostrarInfo());
+        // mostrar por pantalla (no se puede modificar el html en este caso)
+        //document.getElementById("respuesta").innerHTML = "Servicio: " + servicioObjeto.mostrarInfo();
     }
     
     

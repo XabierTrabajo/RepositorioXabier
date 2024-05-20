@@ -32,6 +32,16 @@ class Servicio {
 
     // Método mostrar
     mostrarInfo() {
-        return  `${this.servicio} ${this.pabellon} ${this.visible}`;
+        if (this.visible == false) {
+            return  console.log(`El sercivio ${this.servicio} se encuentra en el pabellón ${this.pabellon}. Visible? ${this.visible}`);
+        }
+        else {
+            // para poder mostrar el resultado por pantalla y consola a la vez
+            // se necesita guardar cada respuesta en variables y luego pido al return que me devuelva las respuestas como array
+            const cons = console.log(`El sercivio ${this.servicio} se encuentra en el pabellón ${this.pabellon}. Visible? ${this.visible}`);
+            const txt = document.getElementById("respuesta").innerHTML = `El sercivio ${this.servicio} se encuentra en el pabellón ${this.pabellon}. Visible? ${this.visible}` //&&
+            return [cons, txt];
+            
+        }
     }
 }

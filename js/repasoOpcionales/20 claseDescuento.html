@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Descuento</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        // event.preventDefault();
+        // document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+    class Producto{
+        constructor(nombre, precio, descuento){
+            this._nombre = nombre;
+            this._precio = precio;
+            this._descuento = descuento;
+        }
+
+        // getters
+        get nombre () {
+            return this._nombre;
+        };
+
+        get precio () {
+            return this._precio;
+        };
+
+        get descuento () {
+            return this._descuento;
+        };
+
+        // setters
+        set nombre (nombre) {
+            this._nombre = nombre;
+        };
+
+        set precio (precio) {
+            this._precio = precio;
+        };
+
+        set descuento (descuento) {
+            this._descuento = descuento;
+        };
+
+
+        //Metodo toString objeto nuevo
+        toString(){
+            let precioNeto = Number(this.precio) - (Number(this.descuento)*Number(this.precio)/100);
+            
+            return `Producto creado: \nNombre: ${this.nombre}, Precio: ${this.precio}, Descuento: ${this.descuento}%, Precio neto: ${precioNeto}.`
+        }
+        
+
+        
+    }
+
+    // crear del producto
+    const nombre = prompt("Escribe el nombre del producto.");
+    const precio = prompt("Escribe el precio del producto.");
+    const descuento = prompt("Escribe el número de descuento (%).");
+    const producto = new Producto(nombre, precio, descuento);
+
+    console.log(producto.toString());
+    document.getElementById("respuesta").innerHTML = producto.toString();
+
+    
+
+
+    
+</script>

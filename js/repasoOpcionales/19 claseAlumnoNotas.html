@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Alumnos y Notas</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        // event.preventDefault();
+        // document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+    class Alumno{
+        constructor(nombre, notaIngles, notaProgramacion, notaHTML){
+            this._nombre = nombre;
+            this._notaIngles = notaIngles;
+            this._notaProgramacion = notaProgramacion;
+            this._notaHTML = notaHTML;
+        }
+
+        // getters
+        get nombre () {
+            return this._nombre;
+        };
+
+        get notaIngles () {
+            return this._notaIngles;
+        };
+
+        get notaProgramacion () {
+            return this._notaProgramacion;
+        };
+
+        get notaHTML () {
+            return this._notaHTML;
+        };
+
+        // setters
+        set nombre (nombre) {
+            this._nombre = nombre;
+        };
+
+        set notaIngles (notaIngles) {
+            this._notaIngles = notaIngles;
+        };
+
+        set notaProgramacion (notaProgramacion) {
+            this._notaProgramacion = notaProgramacion;
+        };
+
+        set notaHTML (notaHTML) {
+            this._notaHTML = notaHTML;
+        };
+
+
+        //Metodo toString objeto nuevo
+        toString(){
+            let media = (Number(this.notaIngles) + Number(this.notaProgramacion) + Number(this.notaHTML)) / 3;
+            
+            return `Alumno creado: \nNombre: ${this.nombre}, Nota de Inglés: ${this.notaIngles}, Nota de Programación: ${this.notaProgramacion}, Nota de HTML: ${this.notaHTML}, Media de las notas: ${media}.`
+        }
+        
+
+        
+    }
+
+    // crear el alumno
+    const nombre = prompt("Escribe el nombre del alumno.");
+    const notaIngles = prompt("Escribe la nota de inglés.");
+    const notaProgramacion = prompt("Escribe la nota de programación.");
+    const notaHTML = prompt("Escribe la nota de HTML.");
+    const alumno = new Alumno(nombre, notaIngles, notaProgramacion, notaHTML);
+
+    console.log(alumno.toString());
+    document.getElementById("respuesta").innerHTML = alumno.toString();
+
+    
+
+
+    
+</script>

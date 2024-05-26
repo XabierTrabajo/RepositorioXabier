@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Piedra</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        // event.preventDefault();
+        // document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+    class Piedra{
+        constructor(nombre, masa, volumen){
+            this._nombre = nombre;
+            this._masa = masa;
+            this._volumen = volumen;
+        }
+
+        // getters
+        get nombre () {
+            return this._nombre;
+        };
+
+        get masa () {
+            return this._masa;
+        };
+
+        get volumen () {
+            return this._volumen;
+        };
+
+        // setters
+        set nombre (nombre) {
+            this._nombre = nombre;
+        };
+
+        set precio (precio) {
+            this._precio = precio;
+        };
+
+        set volumen (volumen) {
+            this._volumen = volumen;
+        };
+
+
+        //Metodo toString objeto nuevo
+        toString(){
+            let densidad = Number(this.masa) / Number(this.volumen);
+            
+            return `Piedra creada: \nNombre: ${this.nombre}, Masa: ${this.masa}, Volumen: ${this.volumen}, Densidad: ${densidad.toFixed(2)}g/cc.`
+        }
+        
+
+        
+    }
+
+    // crear del producto
+    const nombre = prompt("Escribe el nombre del producto.");
+    const masa = prompt("Escribe la masa de la piedra (g).");
+    const volumen = prompt("Escribe el volumen de la piedra (cc).");
+    const piedra = new Piedra(nombre, masa, volumen);
+
+    console.log(piedra.toString());
+    document.getElementById("respuesta").innerHTML = piedra.toString();
+
+    
+
+
+    
+</script>

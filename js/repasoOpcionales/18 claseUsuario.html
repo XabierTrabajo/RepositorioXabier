@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Usuario</title>
+</head>
+
+<body>
+    <span><a href="https://elearning5.hezkuntza.net/015763/mod/page/view.php?id=1690">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        // event.preventDefault();
+        // document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+    class Usuario{
+        constructor(nombre, apellidos, dni, ano, provincia){
+            this._nombre = nombre;
+            this._apellidos = apellidos;
+            this._dni = dni;
+            this._ano = ano;
+            this._provincia = provincia;
+        }
+
+        // getters
+        get nombre () {
+            return this._nombre;
+        };
+
+        get apellidos () {
+            return this._apellidos;
+        };
+
+        get dni () {
+            return this._dni;
+        };
+
+        get ano () {
+            return this._ano;
+        };
+
+        get provincia () {
+            return this._provincia;
+        };
+
+        // setters
+        set nombre (nombre) {
+            this._nombre = nombre;
+        };
+
+        set apellidos (apellidos) {
+            this._apellidos = apellidos;
+        };
+
+        set dni (dni) {
+            this._dni = dni;
+        };
+
+        set ano (ano) {
+            this._ano = ano;
+        };
+
+        set provincia (provincia) {
+            this._provincia = provincia;
+        };
+
+
+        //Metodo toString objeto nuevo
+        toString(){
+            return `Usuario creado: \nNombre: ${this.nombre}, Apellidos: ${this.apellidos}, DNI: ${this.dni}, Fecha nacimiento: ${this.ano}, Provincia: ${this.provincia}.`
+        }
+        // devolver con formato html
+        toHTML(){
+            return `<li>Usuario creado: \nNombre: ${this.nombre}, Apellidos: ${this.apellidos}, DNI: ${this.dni}, Fecha nacimiento: ${this.ano}, Provincia: ${this.provincia}.</li>`
+        }
+
+        generaLogin() {
+            let loginHash = "";
+
+            // obtener Iniciales del nombre y apellidos
+            loginHash = this.nombre.charAt(0);
+            loginHash = loginHash + this.apellidos.charAt(0);
+            // obtener los 2 ultimos numeros del ano
+            loginHash = loginHash + this.ano.charAt(this.ano.length-2);
+            loginHash = loginHash + this.ano.charAt(this.ano.length-1);
+
+            return loginHash;
+        }
+
+        getEdad() {
+            // obtener los el ano nacimiento
+            let edad = this.ano.charAt(this.ano.length-4);
+            edad = edad + this.ano.charAt(this.ano.length-3);
+            edad = edad + this.ano.charAt(this.ano.length-2);
+            edad = edad + this.ano.charAt(this.ano.length-1);
+
+            let date = new Date().getFullYear();
+
+            edad = date - edad;
+
+            return edad;
+        }
+    }
+
+
+
+    //const usuario = new Usuario("Mr X","AE","12345678A","01/01/2010","Albacete");
+    const usuario = new Usuario("Xabier","Bravo","12345678A","21/05/2002","Vizcaya");
+
+
+    console.log(usuario.toString());
+    document.getElementById("respuesta").innerHTML = usuario.toString() + usuario.toHTML();
+    console.log(usuario.generaLogin());
+    console.log(usuario.getEdad());
+</script>

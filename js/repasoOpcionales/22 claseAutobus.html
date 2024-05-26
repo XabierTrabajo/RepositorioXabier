@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Autobus</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    class Bus {
+        constructor(conductor, cap) {
+            this.conductor = conductor;
+            this.capacidad = cap;
+            this.pasajeros = 0;
+        }
+        subir = function (num) {
+            if (this.pasajeros + num < this.capacidad) {
+                this.pasajeros += num;
+            }
+            else {
+                this.pasajeros = this.capacidad
+            }
+        }
+        bajar = function (num) {
+            if (num <= this.pasajeros) {
+                this.pasajeros -= num;
+            }
+            else {
+                this.pasajeros = 0
+            }
+        }
+
+    }
+    class Conductor {
+        constructor(nb, lic) {
+            this.nombre = nb;
+            this.licencia = lic;
+        }
+    }
+    var cond1 = new Conductor("Juan", 1234);
+    var linea1 = new Bus(cond1, 40);
+    let pasajeros = Math.floor(Math.random() * 30);
+
+    console.log("conductor es " + linea1.conductor.nombre);
+    document.getElementById("respuesta").innerHTML = `El conductor es ${linea1.conductor.nombre} <br>`;
+
+    linea1.subir(30);
+    console.log(`Han subido ${pasajeros}. Total pasajeros: ${linea1.pasajeros}`);
+    document.getElementById("respuesta").innerHTML = document.getElementById("respuesta").innerHTML + `Han subido ${pasajeros}. Total pasajeros: ${linea1.pasajeros} <br>`;
+
+    pasajeros = Math.floor(Math.random() * 30);
+    linea1.bajar(pasajeros);
+    console.log(`Han bajado ${pasajeros}. Total pasajeros: ${linea1.pasajeros}`);
+    document.getElementById("respuesta").innerHTML = document.getElementById("respuesta").innerHTML + `Han bajado ${pasajeros}. Total pasajeros: ${linea1.pasajeros} <br>`;
+</script>

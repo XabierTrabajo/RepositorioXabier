@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Banco</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+
+    <br><br><br>
+
+    <span>Ingresar: </span>
+    <input type="number" name="ingresar" id="ingresar" min="0">
+    <button onclick="ingresarDinero()">OK</button>
+
+    <span>Retirar: </span>
+    <input type="number" name="retirar" id="retirar" min="0">
+    <button onclick="retirarDinero()">OK</button>
+    
+    
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        // event.preventDefault();
+        // document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+    class Cuenta{
+        constructor(nombre, saldo){
+            this._nombre = nombre;
+            this._saldo = saldo;
+        }
+
+        // getters
+        get nombre () {
+            return this._nombre;
+        };
+
+        get saldo () {
+            return this._saldo;
+        };
+
+        // setters
+        set nombre (nombre) {
+            this._nombre = nombre;
+        };
+
+        set saldo (saldo) {
+            this._saldo = saldo;
+        };
+
+
+        //Metodo toString objeto nuevo
+        toString(){
+            return `Cuenta creada: \nNombre: ${this.nombre}, Saldo: ${this.saldo}.`
+        }
+        
+    }
+
+    // crear la cuenta del banco
+    const cuenta = new Cuenta("Titular", 1000);
+    let array = [];
+    array.push(cuenta);
+
+    console.log(cuenta.toString());
+    document.getElementById("respuesta").innerHTML = array[0].toString();
+
+    // ingresar el dinero
+    function ingresarDinero() {
+        let dineroIngresado = document.getElementById("ingresar").value;
+        array[0].saldo = Number(array[0].saldo) + Number(dineroIngresado);
+
+        // refrescar 
+        document.getElementById("ingresar").value = null;
+        document.getElementById("respuesta").innerHTML = array[0].toString();
+    }
+    // retirar el dinero
+    function retirarDinero() {
+        let dineroRetirado = document.getElementById("retirar").value;
+
+        if (Number(dineroRetirado) <= Number(array[0].saldo)) {
+            array[0].saldo = Number(array[0].saldo) - Number(dineroRetirado);
+
+            // refrescar 
+            document.getElementById("retirar").value = null;
+            document.getElementById("respuesta").innerHTML = array[0].toString();
+        }
+
+        else {
+            alert("No puedes retirar mas dinero del saldo que tienes.");
+
+            // refrescar 
+            document.getElementById("retirar").value = null;
+            document.getElementById("respuesta").innerHTML = array[0].toString();
+        }
+
+        // refrescar 
+        document.getElementById("ingresar").value = null;
+        document.getElementById("respuesta").innerHTML = array[0].toString();
+    }
+
+    
+</script>

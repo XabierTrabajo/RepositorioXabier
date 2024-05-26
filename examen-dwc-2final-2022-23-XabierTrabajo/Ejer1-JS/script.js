@@ -42,18 +42,35 @@ function generarNumerosAleatorios() {
     }
 
     let numeros = [];
+    let randomNumbers = [];
     for (let i = 0; i < count; i++) {
         let random = Math.floor(Math.random() * limit);
-        numeros.push(random);
+        
+        // si coinciden los numeros
+        if (randomNumbers.includes(random)) {
+            // salta al siguiente
+            random = Math.floor(Math.random() * limit);
+            i--;
+            
+        }
+        else {
+            numeros.push(random);
+            randomNumbers.push(random);
+        }
     }
     // crea el objeto persona
+    /*
     let objetoNumeros = new Persona(nombre, numeros);
     numerosAleatorios.push(objetoNumeros);
     console.log(numerosAleatorios);
     // escribo lo creado
     const respuestasCorrectas = document.body.appendChild(document.createElement("li"));
     respuestasCorrectas.textContent = "Nombre: "+ nombre +" Números: "+ numeros;
+    */
 
+    let playerRandom = new Persona(nombre, numeros);
+    const respuestasCorrectas = document.body.appendChild(document.createElement("li"));
+    respuestasCorrectas.textContent = playerRandom.toString();
 }
 
 class Persona {
@@ -75,5 +92,11 @@ class Persona {
     }
     set numeros(numeros) {
         this._numeros = numeros;
+    }
+
+
+    //Metodo toString objeto nuevo
+    toString(){
+        return `Nombre: ${this.nombre}, Números: ${this.numeros}`
     }
 }

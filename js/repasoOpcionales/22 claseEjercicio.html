@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Ejercicio</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    class Ficha {
+        constructor(n) {
+            this.nombre = n;
+            this.sesiones = [];
+            this.numsesiones = 0
+        }
+        anotar = function (km) {
+            this.sesiones[this.numsesiones] = km;
+            this.numsesiones++;
+        }
+        media = function () {
+            var media = 0;
+
+            for (let i = 0; i < this.sesiones.length; i++) {
+                media += this.sesiones[i];
+            } 
+
+            let resultado = media / this.numsesiones;
+            return resultado;
+        }
+
+        toString(){
+            return `Nombre: ${this.nombre}, Media: ${fichaJuan.media()}km.
+            Sesion: ${this.sesiones}.`
+        }
+    }
+
+    var nombre = prompt("Nombre del usuario");
+    var fichaJuan = new Ficha(nombre);
+    fichaJuan.anotar(10);
+    fichaJuan.anotar(8);
+    fichaJuan.anotar(6);
+    console.log("Media de kilómetros " + fichaJuan.media());
+    document.getElementById("respuesta").innerHTML = fichaJuan.toString();
+</script>

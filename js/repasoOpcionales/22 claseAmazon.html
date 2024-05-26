@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Amazon</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    class Proveedor {
+        constructor(nbr, email, tel) {
+            this.nombre = nbr;
+            this.email = email;
+            this.telefono = tel;
+        }
+    }
+    class Articulo {
+        constructor(nbr, precio, prov) {
+            this.nombre = nbr;
+            this.precio = precio;
+            this.proveedor = prov;
+        }
+        telefono() {
+            return {
+                nombre: this.proveedor.nombre,
+                telefono: this.proveedor.telefono
+            }
+        }
+    }
+    /*probar*/
+    var prov1 = new Proveedor('TecnoSoft', 12345)
+    var monitor = new Articulo('Monitor Super', 250, prov1);
+    var quien;
+    console.log("Proveedor de " + monitor.nombre);
+    quien = monitor.telefono()
+    console.log(quin.nombre);
+    console.log(quien.telefono);
+</script>

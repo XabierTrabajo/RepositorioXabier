@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Facturas</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    var clientes = new Array(3);
+    class Cliente {
+        constructor(nombre, email, telefono) {
+            this.nombre = nombre;
+            this.email = email;
+            this.telefono = telefono;
+        }
+    }
+    class Factura {
+        constructor(id, total, listaCtes) {
+            this.cliente = listaCtes[id];
+            this.total = total;
+            this.estado = "pendiente";
+        }
+        imprimir = function () {
+            console.log("Factura para " + this.cliente.nombre);
+            console.log("Total " + this.total);
+            console.log("Estado " + this.estado);
+        }
+        pagar = function () {
+            this.estado = "pagada";
+        }
+    }
+    clientes[0] = new Cliente('Juan', 'juan#mail.com', 3456718);
+    clientes[1] = new Cliente('Marisa', 'marisa@mail.com', 5556123);
+    clientes[2] = new Cliente('Luis', 'luis@mail.com', 2354322);
+    var factura = new Factura(1, 300, clientes);
+    factura.imprimir();
+    factura.pagar();
+    factura.imprimir();
+</script>

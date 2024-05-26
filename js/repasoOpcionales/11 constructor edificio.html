@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repaso JS - 11</title>
+
+    <div>
+        <span id="respuesta"></span>
+    </div>
 </head>
 <body>
     
@@ -189,12 +193,16 @@
 
         // Método para imprimir propietarios de cada puerta en el edificio
         imprimePlantas  () {
+            let txt = "";
             for (let i = 0; i < this._plantas.length; i++) {
             for (let j = 0; j < this._plantas[i].length; j++) {
                 const propietario = this._plantas[i][j].propietario || 'Vacío';
                 console.log(`Planta ${i + 1}, Puerta ${j + 1}: ${propietario}`);
+                txt = txt + `Planta ${i + 1}, Puerta ${j + 1}: ${propietario} <br>`;
             }
             }
+
+            return txt;
         };
 
         //Metodo toString objeto nuevo
@@ -210,8 +218,12 @@
     console.log(edificio1.toString());
     edificio1.agregarPlantasYPuertas(3, 2);
     edificio1.agregarPropietario('Juan', 1, 1);
+    edificio1.agregarPropietario('Pepe', 1, 2);
     edificio1.agregarPropietario('Ana', 2, 2);
     edificio1.imprimePlantas();
+
+    document.getElementById("respuesta").innerHTML = edificio1.toString();
+    document.getElementById("respuesta").innerHTML = document.getElementById("respuesta").innerHTML + "<br>" + edificio1.imprimePlantas();
 
     const edificio2 = new Edificio('Calle B', 456, '67890');
     console.log(edificio2.toString());

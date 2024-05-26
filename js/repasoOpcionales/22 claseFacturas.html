@@ -30,25 +30,35 @@
         }
     }
     class Factura {
-        constructor(id, total, listaCtes) {
-            this.cliente = listaCtes[id];
+        constructor(id, total, clientes) {
+            this.cliente = clientes[id];
             this.total = total;
             this.estado = "pendiente";
         }
-        imprimir = function () {
+        imprimir() {
             console.log("Factura para " + this.cliente.nombre);
             console.log("Total " + this.total);
             console.log("Estado " + this.estado);
         }
-        pagar = function () {
+        pagar() {
             this.estado = "pagada";
         }
     }
     clientes[0] = new Cliente('Juan', 'juan#mail.com', 3456718);
     clientes[1] = new Cliente('Marisa', 'marisa@mail.com', 5556123);
     clientes[2] = new Cliente('Luis', 'luis@mail.com', 2354322);
-    var factura = new Factura(1, 300, clientes);
-    factura.imprimir();
-    factura.pagar();
-    factura.imprimir();
+    //var factura = new Factura(1, 300, clientes);
+    //factura.imprimir();
+    //factura.pagar();
+    //factura.imprimir();
+
+    
+    var factura;
+    for (let i = 0; i < clientes.length; i++) {
+        factura = new Factura(i, 300, clientes);
+        factura.imprimir();
+        factura.pagar();
+        
+        //document.getElementById("respuesta").innerHTML = document.getElementById("respuesta").innerHTML + factura.imprimir() + "<br>";
+    }
 </script>

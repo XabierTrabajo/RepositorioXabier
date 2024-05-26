@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Colegio</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/clases-objetos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    <span id="respuesta"></span>
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+</style>
+<script>
+    class Alumno {
+        constructor(nbr, mat) {
+            this.nombre = nbr;
+            this.matricula = mat;
+            this.nota = 0;
+        }
+        calificar(nota) {
+            this.nota = nota;
+        }
+
+        toString() {
+            return `Nombre del Alumno: ${this.nombre} | Matricula: ${this.matricula} | Nota: ${this.nota}`;
+        }
+    }
+
+    var grupo = new Array(4);
+    grupo[0] = new Alumno("Juan", 124);
+    grupo[1] = new Alumno("Maria", 324);
+    grupo[2] = new Alumno("Alicia", 154);
+    grupo[3] = new Alumno("Pedro", 324);
+    grupo[0].calificar(5);
+    grupo[1].calificar(4);
+    grupo[2].calificar(8);
+    grupo[3].calificar(3);
+
+    for (let i = 0; i < grupo.length; i++) {
+        console.log(grupo[i].toString());
+
+        document.getElementById("respuesta").innerHTML = document.getElementById("respuesta").innerHTML + grupo[i].toString() + "<br>";
+    }
+</script>

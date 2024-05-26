@@ -27,6 +27,10 @@
             this.email = email;
             this.telefono = tel;
         }
+
+        toString() {
+            return `Nombre del proveedor: ${this.nombre} | Email: ${this.email} | telefono: ${this.telefono}`;
+        }
     }
     class Articulo {
         constructor(nbr, precio, prov) {
@@ -40,13 +44,19 @@
                 telefono: this.proveedor.telefono
             }
         }
+
+        toString() {
+            return `Nombre del articulo: ${this.nombre} | Precio: ${this.precio}$ | Proveedor: ${this.proveedor.nombre}`;
+        }
     }
     /*probar*/
-    var prov1 = new Proveedor('TecnoSoft', 12345)
+    var prov1 = new Proveedor('TecnoSoft', "TecnoContacto@gmail.com", 900900900);
     var monitor = new Articulo('Monitor Super', 250, prov1);
-    var quien;
-    console.log("Proveedor de " + monitor.nombre);
-    quien = monitor.telefono()
-    console.log(quin.nombre);
-    console.log(quien.telefono);
+    var quien = monitor.telefono();
+
+    console.log(monitor.toString());
+    document.getElementById("respuesta").innerHTML = monitor.toString();
+
+    console.log(prov1.toString());
+    document.getElementById("respuesta").innerHTML = document.getElementById("respuesta").innerHTML + "<br>" + prov1.toString();
 </script>

@@ -10,20 +10,26 @@
 <body>
     <form>
         <span>Usuario</span>
-        <input type="text" name="usuario" id="usuario"><br>
+        <input type="text" name="usuario" id="usuario" value="Pepe"><br>
         <span>Contraseña</span>
-        <input type="password" name="pass" id="pass"><br>
+        <input type="password" name="pass" id="pass" value="123456Aa"><br>
         <span>Edad</span>
-        <input type="number" name="edad" id="edad" min="1" max="120"><br>
+        <input type="number" name="edad" id="edad" min="1" max="120" value="20"><br>
         <span>Opciones</span>
         <select name="seleccionLista" id="seleccionLista">
             <option value="">Selecciona opcion</option>
             <option value="1">Opcion 1</option>
             <option value="2">Opcion 2</option>
             <option value="3">Opcion 3</option>
-        </select>
-
-
+        </select><br>
+        <span>Email</span>
+        <input type="email" name="email" id="email" value="pepe@gmail.com"><br>
+        <label for="fechaNac">Fecha nacimiento: </label>
+        <input type="date" name="fechaNac" id="fechaNac" value="2020-10-10"><br>
+        <label for="dni">DNI: </label>
+        <input type="text" name="dni" id="dni" onkeyup="this.value = this.value.toUpperCase();" value="12345678S"><br>
+        <label for="tfno">Telefono: </label>
+        <input type="tel" name="tfno" id="tfno"><br>
 
         <br><br><br>
         <button id="enviar">Validar</button>
@@ -53,9 +59,19 @@
         let usuario = document.getElementById("usuario").value;
         let pass = document.getElementById("pass").value;
         let edad = document.getElementById("edad").value;
-        let opcionLista = document.getElementById("seleccionLista").selectedIndex;;
+        let opcionLista = document.getElementById("seleccionLista").selectedIndex;
+        let email = document.getElementById("email").value;
+        let fechaNac = document.getElementById("fechaNac").value;
+        let dni = document.getElementById("dni").value;
+        let tfno = document.getElementById("tfno").value;
+
         let ok = 0;
         const regexPass = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,30}$/;
+        const EmailRegex = /^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$/;
+        const FechaRegex = /^([0-9]{4})+([-]{1})+([0-9]{2})+([-]{1})+([0-9]{2})$/;
+        const DNIregex = /^([0-9]{8})+([A-Z]{1})$/;
+        const tfnoRegex = /^\d{9}$/ // 900900900
+        //const tfnoRegex = /^\+\d{2,3}\s\d{9}$/ //+34 900900900	
 
         if (usuario == "" || usuario == " " || usuario == null) {
             console.log("Usuario inválido!");
@@ -70,7 +86,7 @@
 
         // contrasena 
         if (!regexPass.test(pass)) {
-           console.log("Contraseñas inválida!");
+            console.log("Contraseñas inválida!");
             error();
             resetPass();
             return false;
@@ -106,16 +122,70 @@
             resetErrorLista();
             ok++;
         }
+        
+        // email
+        if (!EmailRegex.test(email)) {
+            console.log("Email inválido!");
+            errorEmail();
+            return false;
+        }
+
+        else {
+            console.log("Email válido!");
+            resetErrorEmail();
+            ok++;
+        }
+
+        // fecha
+        if (FechaRegex.test(fechaNac) && fechaNac != null) {
+            console.log("Fecha válida!");
+            resetErrorFecha();
+            ok++;
+        }
+
+        else {
+            console.log("Fecha inválida!");
+            errorFecha();
+            return false;
+        }
+
+        // dni
+        if (DNIregex.test(dni) && dni != null) {
+            console.log("DNI válido!");
+            resetErrorDni();
+            ok++;
+        }
+
+        else {
+            console.log("DNI inválido!");
+            errorDni();
+            return false;
+        }
+
+        // tfno
+        if (tfnoRegex.test(tfno) && tfno != null) {
+            console.log("TFNO válido!");
+            resetErrorTfno();
+            ok++;
+        }
+
+        else {
+            console.log("TFNO inválido!");
+            errorTfno();
+            return false;
+        }
 
 
         //si todo ha salido bien 
-        if (ok == 4) {
+        if (ok == 8) {
             
             alert("Te has registrado");
             console.log("Te has registrado");
             // return al final pq si el resto es inaccesible
             return true;
         }
+
+        
        
     }
 
@@ -149,11 +219,43 @@
     }
 
     function errorLista() {
-        // centrar en la contraseña incorrecta
+        // centrar en la opcion incorrecta
         document.getElementById("seleccionLista").focus();
         // cambiar color de error
         document.getElementById("seleccionLista").style.backgroundColor = "red";
         document.getElementById("seleccionLista").style.color = "white";
+    }
+
+    function errorEmail() {
+        // centrar en el email incorrecto
+        document.getElementById("email").focus();
+        // cambiar color de error
+        document.getElementById("email").style.backgroundColor = "red";
+        document.getElementById("email").style.color = "white";
+    }
+
+    function errorFecha() {
+        // centrar en el email incorrecto
+        document.getElementById("fechaNac").focus();
+        // cambiar color de error
+        document.getElementById("fechaNac").style.backgroundColor = "red";
+        document.getElementById("fechaNac").style.color = "white";
+    }
+
+    function errorDni() {
+        // centrar en el email incorrecto
+        document.getElementById("dni").focus();
+        // cambiar color de error
+        document.getElementById("dni").style.backgroundColor = "red";
+        document.getElementById("dni").style.color = "white";
+    }
+
+    function errorTfno() {
+        // centrar en el email incorrecto
+        document.getElementById("tfno").focus();
+        // cambiar color de error
+        document.getElementById("tfno").style.backgroundColor = "red";
+        document.getElementById("tfno").style.color = "white";
     }
 
     function resetError() {
@@ -174,5 +276,25 @@
     function resetErrorLista() {
         // eliminar el estilo del error
         document.getElementById("seleccionLista").removeAttribute("style");
+    }
+
+    function resetErrorEmail() {
+        // eliminar el estilo del error
+        document.getElementById("email").removeAttribute("style");
+    }
+
+    function resetErrorFecha() {
+        // eliminar el estilo del error
+        document.getElementById("fechaNac").removeAttribute("style");
+    }
+
+    function resetErrorDni() {
+        // eliminar el estilo del error
+        document.getElementById("dni").removeAttribute("style");
+    }
+
+    function resetErrorTfno() {
+        // eliminar el estilo del error
+        document.getElementById("tfno").removeAttribute("style");
     }
 </script>

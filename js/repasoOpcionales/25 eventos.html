@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio eventos 25</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/ejercicios-eventos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    
+    <div id="flex">
+        <div id="respuestaL" onclick="clickEvento('respuestaL')">Boton L</div><div id="respuestaR" onclick="clickEvento('respuestaR')">Boton R</div>
+    </div>
+    
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+
+    div {
+        border: 1px solid black;
+        width: 250px;
+    }
+
+    #flex {
+        display: flex;
+        text-align: center;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        event.preventDefault();
+        //document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+   function clickEvento(btnPulsado) {
+    if (btnPulsado == "respuestaL") {
+        alert("Has pulsado el boton L.");
+    }
+    if (btnPulsado == "respuestaR") {
+        alert("Has pulsado el boton R.");
+    }
+   }
+</script>

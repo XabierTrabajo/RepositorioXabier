@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio eventos 27</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/ejercicios-eventos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+
+    <div id="flex">
+        <div id="c1" style="background: red"></div>
+        <div id="c2" style="background: white"></div>
+        <div id="c3" style="background: blue"></div>
+    </div>
+
+
+
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+
+    div {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+
+    #flex {
+        width: 1000px;
+        display: flex;
+        text-align: center;
+        justify-content: space-around;
+        border: 0px solid black;
+    }
+</style>
+<script>
+    c2.addEventListener('mouseenter', pintar);
+    function pintar(e) {
+        let bloque = e.currentTarget;
+        let origen = e.relatedTarget;
+        if (origen.id != 'BODY') {
+            bloque.style.background = origen.style.background;
+        }
+        else {
+            bloque.style.background = 'white';
+        }
+    }
+</script>

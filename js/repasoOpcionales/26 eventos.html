@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio eventos 26</title>
+</head>
+
+<body>
+    <span><a href="https://www.aulascript.com/evaluar/ejercicios-eventos.html">Ver enunciado del ejercicio</a></span>
+    <br><br><br>
+    
+    <span>Numero 1</span>
+    <input type="number" name="numL" id="numL">
+    <span>Numero 2</span>
+    <input type="number" name="numR" id="numR">
+
+    <button onclick="multiplicacion()">Calcular multiplicacion</button>
+
+    <br><br>
+    <span id="respuesta"></span>
+    
+</body>
+
+</html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+    }
+
+    div {
+        border: 1px solid black;
+        width: 250px;
+    }
+
+    #flex {
+        display: flex;
+        text-align: center;
+    }
+</style>
+<script>
+    // cargo el evento al abrir la pagina
+    window.addEventListener("load", eventos);
+
+    // añado el evento al link
+    function eventos() {
+        event.preventDefault();
+        //document.getElementById("enviar").addEventListener("click", validar);
+    }
+
+    function multiplicacion() {
+        let numL = document.getElementById("numL").value;
+        let numR = document.getElementById("numR").value;
+
+        let resultado = numL * numR;
+
+        document.getElementById("respuesta").innerHTML = "Resultado: " + resultado
+    }
+</script>

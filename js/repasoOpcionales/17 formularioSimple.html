@@ -9,8 +9,23 @@
 
 <body>
     <form>
-        <input type="text" name="usuario" id="usuario">
-        <input type="password" name="pass" id="pass">
+        <span>Usuario</span>
+        <input type="text" name="usuario" id="usuario"><br>
+        <span>Contraseña</span>
+        <input type="password" name="pass" id="pass"><br>
+        <span>Edad</span>
+        <input type="number" name="edad" id="edad" min="1" max="120"><br>
+        <span>Opciones</span>
+        <select name="seleccionLista" id="seleccionLista">
+            <option value="">Selecciona opcion</option>
+            <option value="1">Opcion 1</option>
+            <option value="2">Opcion 2</option>
+            <option value="3">Opcion 3</option>
+        </select>
+
+
+
+        <br><br><br>
         <button id="enviar">Validar</button>
     </form>
 </body>
@@ -37,6 +52,9 @@
 
         let usuario = document.getElementById("usuario").value;
         let pass = document.getElementById("pass").value;
+        let edad = document.getElementById("edad").value;
+        let opcionLista = document.getElementById("seleccionLista").selectedIndex;;
+        let ok = 0;
         const regexPass = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,30}$/;
 
         if (usuario == "" || usuario == " " || usuario == null) {
@@ -47,22 +65,58 @@
         else {
             console.log("Usuario válido!");
             resetErrorUser();
+            ok++;
         }
 
         // contrasena 
-        if (regexPass.test(pass)) {
-            console.log("Contraseña válida!");
-            resetError();
-        }
-        else {
-            console.log("Contraseñas inválida!");
+        if (!regexPass.test(pass)) {
+           console.log("Contraseñas inválida!");
             error();
             resetPass();
             return false;
         }
+        else {
+            console.log("Contraseña válida!");
+            resetError();
+            ok++;
+        }
+
+        // edad
+        if (isNaN(edad) || edad.length == 0) {
+            console.log("Edad inválida!");
+            errorEdad();
+            return false;
+        }
+
+        else {
+            console.log("Edad válida!");
+            resetErrorEdad();
+            ok++;
+        }
+
+        // seleccionLista
+        if (opcionLista == null || opcionLista == 0) {
+            console.log("Opción inválida!");
+            errorLista();
+            return false;
+        }
+
+        else {
+            console.log("Opción válida!");
+            resetErrorLista();
+            ok++;
+        }
+
 
         //si todo ha salido bien 
-        alert("Te has registrado")
+        if (ok == 4) {
+            
+            alert("Te has registrado");
+            console.log("Te has registrado");
+            // return al final pq si el resto es inaccesible
+            return true;
+        }
+       
     }
 
     function errorUser() {
@@ -86,6 +140,22 @@
         document.getElementById("pass").style.color = "white";
     }
 
+    function errorEdad() {
+        // centrar en la contraseña incorrecta
+        document.getElementById("edad").focus();
+        // cambiar color de error
+        document.getElementById("edad").style.backgroundColor = "red";
+        document.getElementById("edad").style.color = "white";
+    }
+
+    function errorLista() {
+        // centrar en la contraseña incorrecta
+        document.getElementById("seleccionLista").focus();
+        // cambiar color de error
+        document.getElementById("seleccionLista").style.backgroundColor = "red";
+        document.getElementById("seleccionLista").style.color = "white";
+    }
+
     function resetError() {
         // eliminar el estilo del error
         document.getElementById("pass").removeAttribute("style");
@@ -94,5 +164,15 @@
     function resetPass() {
         // reseteo las contraseñas
         document.getElementById("pass").value = "";
+    }
+
+    function resetErrorEdad() {
+        // eliminar el estilo del error
+        document.getElementById("edad").removeAttribute("style");
+    }
+
+    function resetErrorLista() {
+        // eliminar el estilo del error
+        document.getElementById("seleccionLista").removeAttribute("style");
     }
 </script>

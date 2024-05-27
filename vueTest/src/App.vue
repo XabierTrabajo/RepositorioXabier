@@ -44,6 +44,8 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/ejercicioFruteria">Ejercicio Fruteria</RouterLink>
         <RouterLink to="/ejercicioConversor">Ejercicio Conversor de Longitud, Money, Tiempo</RouterLink>
         <RouterLink to="/ejercicioBurger">Ejercicio Hamburgueseria</RouterLink>
+        <RouterLink to="/CarruselView">Ejercicio Carrusel</RouterLink>
+
       </nav>
     </div>
   </header>

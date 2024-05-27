@@ -32,6 +32,7 @@ import EjercicioHighscoresAlumnosView from '../views/EjercicioHighscoresAlumnosV
 import EjercicioFruteriaView from '../views/EjercicioFruteriaView.vue'
 import ConversorLongitudMoneyTiempoView from '../views/ConversorLongitudMoneyTiempoView.vue'
 import EjercicioHamburgueseriaView from '../views/EjercicioHamburgueseriaView.vue'
+import CarruselView from '../views/CarruselView.vue'
 
 
 const router = createRouter({
@@ -209,6 +210,11 @@ const router = createRouter({
       path: '/ejercicioBurger',
       name: 'ejercicioBurger',
       component: EjercicioHamburgueseriaView
+    },
+    {
+      path: '/CarruselView',
+      name: 'CarruselView',
+      component: CarruselView
     }
   ]
 })

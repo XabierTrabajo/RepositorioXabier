@@ -17,9 +17,9 @@ function validar() {
     let visible = false;
     let arrayError = 0;
     let valido = 0;
-
+    const nombreRegex = /w[a-zA-Z0-9-]/;
     // servicio
-    if (!(/w[a-zA-Z0-9-]/.test(servicio))) {
+    if (nombreRegex.test(servicio)) {
         console.log("servicio correcto");
         valido++;
     }
